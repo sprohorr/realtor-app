@@ -7,20 +7,26 @@ import java.util.Objects;
 @Entity
 @Table(name = "order")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
+
     @Column(name = "open_time")
     private LocalDateTime openTime;
+
     @Column(name = "close_time")
     private LocalDateTime closeTime;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "status_order_id")
     private StatusOrder status;
+
     @OneToOne
     @JoinColumn(name = "apartment_id")
     private Apartment apartment;

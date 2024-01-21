@@ -1,31 +1,20 @@
-package org.example.entity;
+package org.example.dto;
 
-import javax.persistence.*;
+
 import java.util.Objects;
 
-@Entity
-@Table(name = "realty_agent")
-public class RealtyAgent {
+public class RealtyAgentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "tel")
     private String tel;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "address")
     private String address;
 
-    public RealtyAgent() {
-    }
 
     public int getId() {
         return id;
@@ -71,7 +60,7 @@ public class RealtyAgent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RealtyAgent that = (RealtyAgent) o;
+        RealtyAgentDTO that = (RealtyAgentDTO) o;
         return id == that.id && tel == that.tel && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(address, that.address);
     }
 

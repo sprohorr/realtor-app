@@ -1,48 +1,28 @@
-package org.example.entity;
+package org.example.dto;
 
-import org.example.util.BooleanConverter;
+import org.example.entity.Building;
+import org.example.entity.RealtyAgent;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "apartment")
-public class Apartment {
+public class ApartmentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
 
-    @Column(name = "number_apartment")
     private int number;
 
-    @Column(name = "quantity_rooms")
     private int quantityRooms;
 
-    @Column(name = "apartment_area")
     private double area;
 
-    @Column(name = "price")
     private double price;
 
-    @Column(name = "status")
-    @Convert(converter = BooleanConverter.class)
     private boolean status;
 
-    @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "building_id")
     private Building building;
-
-    @ManyToOne
-    @JoinColumn(name = "realty_agent_id")
     private RealtyAgent realtyAgent;
-
-    public Apartment() {
-    }
 
     public int getId() {
         return id;
@@ -120,8 +100,8 @@ public class Apartment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Apartment apartment = (Apartment) o;
-        return id == apartment.id && number == apartment.number && quantityRooms == apartment.quantityRooms && Double.compare(apartment.area, area) == 0 && Double.compare(apartment.price, price) == 0 && status == apartment.status && Objects.equals(description, apartment.description) && Objects.equals(building, apartment.building) && Objects.equals(realtyAgent, apartment.realtyAgent);
+        ApartmentDTO that = (ApartmentDTO) o;
+        return id == that.id && number == that.number && quantityRooms == that.quantityRooms && Double.compare(that.area, area) == 0 && Double.compare(that.price, price) == 0 && status == that.status && Objects.equals(description, that.description) && Objects.equals(building, that.building) && Objects.equals(realtyAgent, that.realtyAgent);
     }
 
     @Override

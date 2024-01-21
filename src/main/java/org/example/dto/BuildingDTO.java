@@ -1,46 +1,26 @@
-package org.example.entity;
+package org.example.dto;
 
-import org.example.util.BooleanConverter;
-
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "building")
-public class Building {
+public class BuildingDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
 
-    @Column(name = "address")
     private String address;
 
-    @Column(name = "floors")
     private int floors;
 
-    @Column(name = "land_area")
     private double landArea;
 
-    @Column(name = "building_area")
     private double buildingArea;
 
-    @Column(name = "quantity_apartments")
     private int quantityApartments;
 
-    @Column(name = "year")
     private int year;
 
-    @Column(name = "parking")
-    @Convert(converter = BooleanConverter.class)
     private boolean parking;
 
-    @Column(name = "description")
     private String description;
-
-    public Building() {
-    }
 
     public int getId() {
         return id;
@@ -118,8 +98,8 @@ public class Building {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Building building = (Building) o;
-        return id == building.id && floors == building.floors && Double.compare(building.landArea, landArea) == 0 && Double.compare(building.buildingArea, buildingArea) == 0 && quantityApartments == building.quantityApartments && year == building.year && parking == building.parking && Objects.equals(address, building.address) && Objects.equals(description, building.description);
+        BuildingDTO that = (BuildingDTO) o;
+        return id == that.id && floors == that.floors && Double.compare(that.landArea, landArea) == 0 && Double.compare(that.buildingArea, buildingArea) == 0 && quantityApartments == that.quantityApartments && year == that.year && parking == that.parking && Objects.equals(address, that.address) && Objects.equals(description, that.description);
     }
 
     @Override

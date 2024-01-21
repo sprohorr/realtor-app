@@ -6,6 +6,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "status_order")
 public class StatusOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

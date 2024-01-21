@@ -7,19 +7,25 @@ import java.util.Objects;
 @Entity
 @Table(name = "feedback")
 public class Feedback {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "grade")
     private int grade;
+
     @Column(name = "create_time")
     private LocalDateTime createDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "apartment_id")
     private Apartment apartment;

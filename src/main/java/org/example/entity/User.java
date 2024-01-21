@@ -7,24 +7,33 @@ import java.util.Objects;
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "login")
     private String login;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "create_time")
     private LocalDateTime createTime;
+
     @Column(name = "update_time")
     private LocalDateTime updateTime;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
