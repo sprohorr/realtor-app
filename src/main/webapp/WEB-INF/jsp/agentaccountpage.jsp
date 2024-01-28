@@ -5,15 +5,32 @@
 <head>
     <title>Account agent</title>
 </head>
-<body>
+<body style="background-color: lavender">
+<div><h2 align="center">Account realty agent</h2></div>
 <div>
-    <p>Name: ${agent.name}</p>
-    <p>Number phone: ${agent.tel}</p>
-    <p>Email: ${agent.email}</p>
-    <p>Address: ${agent.address}</p>
-    <a href="/agentedit?agent.id=${agent.id}">Edit</a><br/>
-    <a href="/apartmentadd?agent.id=${agent.id}">Add apartment</a><br/>
-    <a href="/apartmentlist">Apartments of list</a>
+    <table border="2px" align="center">
+        <tr>
+            <td><c:out value="Name: ${agent.name}"/></td>
+        </tr>
+        <tr>
+            <td><c:out value="Number phone: ${agent.tel}"/></td>
+        </tr>
+        <tr>
+            <td><c:out value="Email: ${agent.email}"/></td>
+        </tr>
+        <tr>
+            <td><c:out value="Address: ${agent.address}"/></td>
+        </tr>
+        <tr>
+            <td><a href="/agentedit?agent.id=${agent.id}">Edit</a></td>
+        </tr>
+        <tr>
+            <td><a href="/apartmentadd?agent.id=${agent.id}">Add apartment for this agent</a></td>
+        </tr>
+        <tr>
+            <td><a href="/apartmentlist?agent.id=${agent.id}">Apartments of list this agent</a></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

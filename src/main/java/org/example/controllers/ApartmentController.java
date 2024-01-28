@@ -34,8 +34,8 @@ public class ApartmentController {
     }
 
     @PostMapping("/apartmentadd")
-    public String saveApartment(@RequestParam("agent.id") int agentId, ModelMap modelMap, ApartmentDTO apartmentDTO) {
-        modelMap.put("apartment", apartmentService.saveApartment(agentId, apartmentDTO));
+    public String saveApartment(ModelMap modelMap, ApartmentDTO apartmentDTO) {
+        modelMap.put("apartment", apartmentService.saveApartment(apartmentDTO));
         return "redirect:/agentlist";
     }
 

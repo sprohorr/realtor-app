@@ -23,22 +23,22 @@ public class ApartmentService {
     protected TransformerDtoApartment transformerDtoApartment;
 
     public Apartment findApartmentById(int id) {
-        return apartmentRepository.findApartmentById(id);
+        return apartmentRepository.findById(id);
     }
 
     public List<Apartment> findAllApartmentsByRealtyAgent(int id) {
         return apartmentRepository.findAllByRealtyAgent_Id(id);
     }
 
-    public Apartment saveApartment(int id, ApartmentDTO apartmentDTO) {
+    public Apartment saveApartment(ApartmentDTO apartmentDTO) {
+        Apartment apartment = new Apartment();
         return apartmentRepository
-                .save(transformerDtoApartment.createTransformDtoApartment(id, apartmentDTO));
+                .save(transformerDtoApartment.populateBeanFromDTO(apartment, apartmentDTO));
     }
 
     public Apartment editApartment(int apartmentId, ApartmentDTO apartmentDTO) {
         return apartmentRepository
                 .save(transformerDtoApartment
-                        .editTransformDtoApartment(apartmentRepository
-                                .findApartmentById(apartmentId), apartmentDTO));
+                        .populateBeanFromDTO(apartmentRepository.findById(apartmentId), apartmentDTO));
     }
 }

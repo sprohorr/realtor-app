@@ -7,11 +7,11 @@
 </head>
 <body style="background-color: lavender">
 <div><h2 align="center">Edit realty agent</h2></div>
-<div align="center">
+<div>
   <form:form action="${pageContext.request.contextPath}/agentedit" method="post" modelAttribute="agent">
-    <table>
-      <tr>
-        <td><input type="hidden" name="agent.id" value="${agent.id}"/></td>
+      <table align="center" border="2px">
+          <tr>
+              <td><input type="hidden" name="agent.id" value="${agent.id}"/></td>
       </tr>
       <tr>
         <td><form:input path="name"/>Name</td>
@@ -25,10 +25,13 @@
       <tr>
         <td><form:input path="address"/>Address</td>
       </tr>
-    </table>
-    <button type="submit">Edit</button>
+          <tr>
+              <td>
+                  <button type="submit">Edit</button>
+              </td>
+          </tr>
+      </table>
   </form:form>
 </div>
-
 </body>
 </html>

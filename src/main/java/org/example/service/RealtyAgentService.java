@@ -19,8 +19,9 @@ public class RealtyAgentService {
     protected RealtyAgentRepository realtyAgentRepository;
 
     public RealtyAgent saveRealtyAgent(RealtyAgentDTO realtyAgentDTO) {
+        RealtyAgent realtyAgent = new RealtyAgent();
         return realtyAgentRepository
-                .save(transformerDtoRealtyAgent.saveTransformDtoRealtyAgent(realtyAgentDTO));
+                .save(transformerDtoRealtyAgent.populateBeanFromDTO(realtyAgent, realtyAgentDTO));
     }
 
     public List<RealtyAgent> findAll() {
@@ -28,11 +29,11 @@ public class RealtyAgentService {
     }
 
     public RealtyAgent findRealtyAgentById(int id) {
-        return realtyAgentRepository.findRealtyAgentById(id);
+        return realtyAgentRepository.findById(id);
     }
 
     public RealtyAgent editAgent(int id, RealtyAgentDTO realtyAgentDTO) {
         return realtyAgentRepository.save(transformerDtoRealtyAgent
-                .editTransformDtoRealtyAgent(findRealtyAgentById(id), realtyAgentDTO));
+                .populateBeanFromDTO(findRealtyAgentById(id), realtyAgentDTO));
     }
 }

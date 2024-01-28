@@ -8,10 +8,13 @@
 <body style="background-color: lavender">
 <div><h2 align="center">Edit apartment</h2></div>
 <div>
-    <form:form action="${pageContext.request.contextPath}/apartmentedit" method="post" modelAttribute="apartment">
-        <table align="center">
+    <form:form action="/apartmentedit" method="post" modelAttribute="apartment">
+        <table align="center" border="2px">
             <tr>
-                <td><input type="hidden" name="apartment.id" value="${apartment.id}"></td>
+                <td><form:input path="realtyAgent.id"/>Id realty agent</td>
+            </tr>
+            <tr>
+                <td><form:input path="building.id"/>Id building</td>
             </tr>
             <tr>
                 <td><form:input path="number"/>Number apartment</td>

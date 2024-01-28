@@ -5,12 +5,12 @@
     <title>List agents</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="centre">List realty agents</h2></div>
+<div><h2 align="center">List realty agents</h2></div>
 <div>
-    <table border="2px">
+    <table border="2px" align="center">
         <c:forEach items="${agent}" var="agent">
             <tr>
-                <td><p>Name: ${agent.name}</p></td>
+                <td><c:out value="Name: ${agent.name}"/></td>
                 <td><a href="/agentaccountpage?agent.id=${agent.id}">Account page</a></td>
                 <td><a href="/apartmentlist?agent.id=${agent.id}">List of apartment</a></td>
             </tr>

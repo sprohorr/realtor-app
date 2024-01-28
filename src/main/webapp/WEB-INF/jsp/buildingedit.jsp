@@ -9,9 +9,9 @@
 <div><h2 align="center">Edit building</h2></div>
 <div>
   <form:form action="${pageContext.request.contextPath}/buildingedit" method="post" modelAttribute="building">
-    <table>
-      <tr>
-        <td><input type="hidden" name="building.id" value="${building.id}"/></td>
+      <table align="center" border="2px">
+          <tr>
+              <td><input type="hidden" name="building.id" value="${building.id}"/></td>
       </tr>
       <tr>
         <td><form:input path="address"/>Address</td>
@@ -26,22 +26,26 @@
         <td><form:input path="buildingArea"/>Building Area</td>
       </tr>
       <tr>
-        <td><form:input path="quantityApartments"/>Quantity apartments</td>
+          <td><form:input path="quantityApartments"/>Quantity apartments</td>
       </tr>
-      <tr>
-        <td><form:input path="year"/>Year build</td>
-      </tr>
-      <tr>
-        <td><form:input path="description"/>Description</td>
-      </tr>
-      <tr>
-        <td><p>Parking</p>
-          <p>Yes</p><form:checkbox path="parking" value="1"/>
-          <p>No</p><form:checkbox path="parking" value="0"/>
-        </td>
-      </tr>
-    </table>
-    <button type="submit">Edit</button>
+          <tr>
+              <td><form:input path="year"/>Year build</td>
+          </tr>
+          <tr>
+              <td><form:input path="description"/>Description</td>
+          </tr>
+          <tr>
+              <td><p>Parking</p>
+                  <p>Yes</p><form:radiobutton path="parking" value="1"/>
+                  <p>No</p><form:radiobutton path="parking" value="0"/>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <button type="submit">Edit</button>
+              </td>
+          </tr>
+      </table>
   </form:form>
 </div>
 </body>

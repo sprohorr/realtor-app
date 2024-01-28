@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RealtyAgentRepository extends JpaRepository<RealtyAgent, Integer> {
 
-    RealtyAgent findRealtyAgentById(int id);
+    RealtyAgent findById(int id);
+
 }

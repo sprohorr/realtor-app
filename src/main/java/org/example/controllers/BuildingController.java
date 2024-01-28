@@ -15,6 +15,12 @@ public class BuildingController {
     @Autowired
     protected BuildingService buildingService;
 
+    @GetMapping("/buildingapartmentlist")
+    public String showApartmentsListFromBuilding(@RequestParam("building") int buildingId, ModelMap modelMap) {
+        modelMap.put("apartments", buildingService.showApartments(buildingId));
+        return "/buildingapartmentlist";
+    }
+
     @GetMapping("/buildingadd")
     public String addBuilding(ModelMap modelMap) {
         modelMap.addAttribute("building", new BuildingDTO());

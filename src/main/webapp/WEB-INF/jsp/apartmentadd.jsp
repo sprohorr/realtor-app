@@ -8,10 +8,13 @@
 <body style="background-color: lavender">
 <div><h2 align="center">Add new apartment. Realty Agent ${agent.name}</h2></div>
 <div>
-    <form:form action="${pageContext.request.contextPath}/apartmentadd" method="post" modelAttribute="apartment">
-        <table align="center">
+    <form:form action="/apartmentadd" method="post" modelAttribute="apartment">
+        <table align="center" border="2px">
             <tr>
-                <td><input type="hidden" name="agent.id" value="${agent.id}"></td>
+                <td><form:input path="realtyAgent.id"/>Id realty agent</td>
+            </tr>
+            <tr>
+                <td><form:input path="building.id"/>Id building</td>
             </tr>
             <tr>
                 <td><form:input path="number"/>Number apartment</td>
@@ -40,7 +43,6 @@
                 </td>
             </tr>
         </table>
-
     </form:form>
 </div>
 </body>

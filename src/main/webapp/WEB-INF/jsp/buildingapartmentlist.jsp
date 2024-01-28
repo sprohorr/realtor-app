@@ -3,11 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Apartments list</title>
+    <title>Apartments in this building</title>
 </head>
 <body style="background-color: lavender">
 <div>
-    <h2 align="center">List of apartments ${agent.name}</h2>
+    <h2 align="center">List of apartments in this building</h2>
 </div>
 <div>
     <table border="2px" align="center">

@@ -12,7 +12,7 @@
 </div>
 <div>
     <form:form action="/buildingadd" method="post" modelAttribute="building">
-        <table align="center">
+        <table align="center" border="2px">
             <tr>
                 <td><form:input path="address"/>Address</td>
             </tr>
@@ -46,7 +46,6 @@
                 </td>
             </tr>
         </table>
-
     </form:form>
 </div>
 </body>
