@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BuildingService {
@@ -23,7 +24,7 @@ public class BuildingService {
     @Autowired
     protected ApartmentRepository apartmentRepository;
 
-    public List<Apartment> showApartments(int id) {
+    public List<Apartment> findApartmentsFromBuilding(int id) {
         return apartmentRepository.findAllByBuilding_Id(id);
     }
 
@@ -37,13 +38,13 @@ public class BuildingService {
         return buildingRepository.findAll();
     }
 
-    public Building findBuildingById(int id) {
-        return buildingRepository.findById(id);
+    public Optional<Building> findBuildingById(int id) {
+        return Optional.ofNullable(buildingRepository.findById(id).orElse(null));
     }
 
-    public Building editBuilding(int id, BuildingDTO buildingDTO) {
-        return buildingRepository.save(transformerDtoBuilding
+    public Optional<Building> editBuilding(int id, BuildingDTO buildingDTO) {
+        return Optional.of(buildingRepository.save(transformerDtoBuilding
                 .populateBeanFromDTO(buildingRepository
-                        .findById(id), buildingDTO));
+                        .findById(id).orElse(null), buildingDTO)));
     }
 }

@@ -12,16 +12,16 @@
         <table align="center" border="2px">
             <tr>
                 <td><form:input path="name"/>Name</td>
-      </tr>
-      <tr>
-        <td><form:input path="tel"/>Number phone</td>
-      </tr>
-      <tr>
-        <td><form:input path="email"/>Email</td>
-      </tr>
-      <tr>
-        <td><form:input path="address"/>Address</td>
-      </tr>
+            </tr>
+            <tr>
+                <td><form:input path="tel"/>Number phone</td>
+            </tr>
+            <tr>
+                <td><form:input path="email"/>Email</td>
+            </tr>
+            <tr>
+                <td><form:input path="address"/>Address</td>
+            </tr>
             <tr>
                 <td>
                     <button type="submit">Add</button>

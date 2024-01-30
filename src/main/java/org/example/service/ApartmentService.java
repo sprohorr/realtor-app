@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApartmentService {
@@ -22,8 +23,8 @@ public class ApartmentService {
     @Autowired
     protected TransformerDtoApartment transformerDtoApartment;
 
-    public Apartment findApartmentById(int id) {
-        return apartmentRepository.findById(id);
+    public Optional<Apartment> findApartmentById(int id) {
+        return Optional.ofNullable(apartmentRepository.findById(id).orElse(null));
     }
 
     public List<Apartment> findAllApartmentsByRealtyAgent(int id) {
@@ -36,9 +37,9 @@ public class ApartmentService {
                 .save(transformerDtoApartment.populateBeanFromDTO(apartment, apartmentDTO));
     }
 
-    public Apartment editApartment(int apartmentId, ApartmentDTO apartmentDTO) {
-        return apartmentRepository
+    public Optional<Apartment> editApartment(int apartmentId, ApartmentDTO apartmentDTO) {
+        return Optional.of(apartmentRepository
                 .save(transformerDtoApartment
-                        .populateBeanFromDTO(apartmentRepository.findById(apartmentId), apartmentDTO));
+                        .populateBeanFromDTO(apartmentRepository.findById(apartmentId).orElse(null), apartmentDTO)));
     }
 }
