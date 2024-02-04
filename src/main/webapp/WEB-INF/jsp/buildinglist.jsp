@@ -23,9 +23,8 @@
                 <td><c:set var="parking">${building.parking ? "Yes" : "No"}</c:set>
                     <c:out value="Parking: ${parking}"/></td>
                 <td><c:out value="Description: ${building.description}"/></td>
-                <td><a href="/buildingedit?building.id=${building.id}">Edit</a></td>
-                <td><a href="/buildingapartmentlist?building=${building.id}">List apartments</a></td>
-                    <%--                create apartment list in building controller--%>
+                <td><a href="/buildingedit?buildingId=${building.id}">Edit</a></td>
+                <td><a href="/buildingapartmentlist?buildingId=${building.id}">List apartments</a></td>
             </tr>
         </c:forEach>
     </table>

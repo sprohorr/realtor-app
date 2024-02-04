@@ -22,7 +22,7 @@
                 <td><c:set var="status">${apartment.status ? "Open" : "Close"}</c:set>
                     <c:out value="Status: ${status}"/>
                 </td>
-                <td><a href="/apartmentedit?apartment.id=${apartment.id}">Edit</a></td>
+                <td><a href="/apartmentedit?apartmentId=${apartment.id}">Edit</a></td>
             </tr>
         </c:forEach>
     </table>

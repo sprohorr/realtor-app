@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RealtyAgentService {
@@ -29,12 +28,12 @@ public class RealtyAgentService {
         return realtyAgentRepository.findAll();
     }
 
-    public Optional<RealtyAgent> findRealtyAgentById(int id) {
-        return Optional.ofNullable(realtyAgentRepository.findById(id).orElse(null));
+    public RealtyAgent findRealtyAgentById(int id) {
+        return realtyAgentRepository.findById(id).orElse(null);
     }
 
-    public Optional<RealtyAgent> editAgent(int id, RealtyAgentDTO realtyAgentDTO) {
-        return Optional.of(realtyAgentRepository.save(transformerDtoRealtyAgent
-                .populateBeanFromDTO(realtyAgentRepository.findById(id).orElse(null), realtyAgentDTO)));
+    public RealtyAgent editAgent(int id, RealtyAgentDTO realtyAgentDTO) {
+        return realtyAgentRepository.save(transformerDtoRealtyAgent
+                .populateBeanFromDTO(realtyAgentRepository.findById(id).orElse(null), realtyAgentDTO));
     }
 }

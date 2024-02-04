@@ -22,9 +22,9 @@ public class RealtyAgentController {
     }
 
     @PostMapping("/agentadd")
-    public String createAgent(ModelMap modelMap, RealtyAgentDTO realtyAgentDTO) {
-        modelMap.put("agent", realtyAgentService.saveRealtyAgent(realtyAgentDTO));
-        return "redirect:/agentsuccess";
+    public String createAgent(RealtyAgentDTO realtyAgentDTO) {
+        realtyAgentService.saveRealtyAgent(realtyAgentDTO);
+        return "redirect:/agentlist";
     }
 
     @GetMapping("/agentlist")
@@ -39,20 +39,20 @@ public class RealtyAgentController {
     }
 
     @GetMapping("/agentedit")
-    public String editAgent(@RequestParam("agent.id") int id, ModelMap modelMap) {
+    public String editAgent(@RequestParam("agentId") int id, ModelMap modelMap) {
         modelMap.addAttribute("agent", new RealtyAgentDTO());
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(id));
         return "/agentedit";
     }
 
     @PostMapping("/agentedit")
-    public String saveEditAgent(@RequestParam("agent.id") int id, RealtyAgentDTO realtyAgentDTO) {
+    public String saveEditAgent(@RequestParam("agentId") int id, RealtyAgentDTO realtyAgentDTO) {
         realtyAgentService.editAgent(id, realtyAgentDTO);
         return "redirect:/agentlist";
     }
 
     @GetMapping("/agentaccountpage")
-    public String showAccountPage(@RequestParam("agent.id") int id, ModelMap modelMap) {
+    public String showAccountPage(@RequestParam("agentId") int id, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(id));
         return "/agentaccountpage";
     }

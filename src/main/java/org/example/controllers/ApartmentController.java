@@ -20,35 +20,35 @@ public class ApartmentController {
     protected RealtyAgentService realtyAgentService;
 
     @GetMapping("/apartmentlist")
-    public String showApartments(@RequestParam("agent.id") int agentId, ModelMap modelMap) {
+    public String showApartments(@RequestParam("agentId") int agentId, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
         modelMap.put("apartments", apartmentService.findAllApartmentsByRealtyAgent(agentId));
         return "/apartmentlist";
     }
 
     @GetMapping("/apartmentadd")
-    public String addApartment(@RequestParam("agent.id") int agentId, ModelMap modelMap) {
+    public String addApartment(@RequestParam("agentId") int agentId, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
         modelMap.addAttribute("apartment", new ApartmentDTO());
         return "/apartmentadd";
     }
 
     @PostMapping("/apartmentadd")
-    public String saveApartment(ModelMap modelMap, ApartmentDTO apartmentDTO) {
-        modelMap.put("apartment", apartmentService.saveApartment(apartmentDTO));
+    public String saveApartment(ApartmentDTO apartmentDTO) {
+        apartmentService.saveApartment(apartmentDTO);
         return "redirect:/agentlist";
     }
 
     @GetMapping("/apartmentedit")
-    public String editApartment(@RequestParam("apartment.id") int apartmentId, ModelMap modelMap) {
+    public String editApartment(@RequestParam("apartmentId") int apartmentId, ModelMap modelMap) {
         modelMap.addAttribute("apartment", new ApartmentDTO());
         modelMap.put("apartment", apartmentService.findApartmentById(apartmentId));
         return "/apartmentedit";
     }
 
     @PostMapping("/apartmentedit")
-    public String saveEditApartment(@RequestParam("apartment.id") int apartmentId, ModelMap modelMap, ApartmentDTO apartmentDTO) {
-        modelMap.put("apartment", apartmentService.editApartment(apartmentId, apartmentDTO));
+    public String saveEditApartment(@RequestParam("apartmentId") int apartmentId, ApartmentDTO apartmentDTO) {
+        apartmentService.editApartment(apartmentId, apartmentDTO);
         return "redirect:/agentlist";
     }
 }

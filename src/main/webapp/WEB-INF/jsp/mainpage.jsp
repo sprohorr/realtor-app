@@ -7,8 +7,9 @@
 <body style="background-color: lavender">
 <header>
     <div align="right">
-        <a href="#"><p>Registration</p></a>
-        <a href="#"><p>Log in</p></a>
+        <a href="/registration"><p>Registration</p></a>
+        <a href="/login"><p>Log in</p></a>
+        <a href="/adminpage"><p>Admin page</p></a>
     </div>
     <h1 align="center">Realtor app</h1>
 </header>

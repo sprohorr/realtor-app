@@ -11,8 +11,8 @@
         <c:forEach items="${agent}" var="agent">
             <tr>
                 <td><c:out value="Name: ${agent.name}"/></td>
-                <td><a href="/agentaccountpage?agent.id=${agent.id}">Account page</a></td>
-                <td><a href="/apartmentlist?agent.id=${agent.id}">List of apartment</a></td>
+                <td><a href="/agentaccountpage?agentId=${agent.id}">Account page</a></td>
+                <td><a href="/apartmentlist?agentId=${agent.id}">List of apartment</a></td>
             </tr>
             <br/>
         </c:forEach>

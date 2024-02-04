@@ -22,13 +22,13 @@
             <td><c:out value="Address: ${agent.address}"/></td>
         </tr>
         <tr>
-            <td><a href="/agentedit?agent.id=${agent.id}">Edit</a></td>
+            <td><a href="/agentedit?agentId=${agent.id}">Edit</a></td>
         </tr>
         <tr>
-            <td><a href="/apartmentadd?agent.id=${agent.id}">Add apartment for this agent</a></td>
+            <td><a href="/apartmentadd?agentId=${agent.id}">Add apartment for this agent</a></td>
         </tr>
         <tr>
-            <td><a href="/apartmentlist?agent.id=${agent.id}">Apartments of list this agent</a></td>
+            <td><a href="/apartmentlist?agentId=${agent.id}">Apartments of list this agent</a></td>
         </tr>
     </table>
 </div>

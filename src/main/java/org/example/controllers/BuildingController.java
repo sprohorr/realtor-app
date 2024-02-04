@@ -16,7 +16,7 @@ public class BuildingController {
     protected BuildingService buildingService;
 
     @GetMapping("/buildingapartmentlist")
-    public String showApartmentsListFromBuilding(@RequestParam("building") int buildingId, ModelMap modelMap) {
+    public String showApartmentsListFromBuilding(@RequestParam("buildingId") int buildingId, ModelMap modelMap) {
         modelMap.put("apartments", buildingService.findApartmentsFromBuilding(buildingId));
         return "/buildingapartmentlist";
     }
@@ -28,8 +28,8 @@ public class BuildingController {
     }
 
     @PostMapping("/buildingadd")
-    public String createBuilding(ModelMap modelMap, BuildingDTO buildingDTO) {
-        modelMap.put("building", buildingService.saveBuilding(buildingDTO));
+    public String createBuilding(BuildingDTO buildingDTO) {
+        buildingService.saveBuilding(buildingDTO);
         return "redirect:/buildingsuccess";
     }
 
@@ -45,14 +45,14 @@ public class BuildingController {
     }
 
     @GetMapping("/buildingedit")
-    public String editBuilding(@RequestParam("building.id") int id, ModelMap modelMap) {
+    public String editBuilding(@RequestParam("buildingId") int id, ModelMap modelMap) {
         modelMap.addAttribute("building", new BuildingDTO());
         modelMap.put("building", buildingService.findBuildingById(id));
         return "/buildingedit";
     }
 
     @PostMapping("/buildingedit")
-    public String saveEditBuilding(@RequestParam("building.id") int id, BuildingDTO buildingDTO) {
+    public String saveEditBuilding(@RequestParam("buildingId") int id, BuildingDTO buildingDTO) {
         buildingService.editBuilding(id, buildingDTO);
         return "redirect:/buildinglist";
     }
