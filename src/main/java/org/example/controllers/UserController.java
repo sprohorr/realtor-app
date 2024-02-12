@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,16 @@ public class UserController {
         return "/adminpage";
     }
 
+    @GetMapping("/usererror")
+    public String error() {
+        return "/usererror";
+    }
+
+    @GetMapping("/usersuccess")
+    public String successfully() {
+        return "/usersuccess";
+    }
+
     @GetMapping("/registration")
     public String createUser(ModelMap modelMap) {
         modelMap.addAttribute("user", new UserDTO());
@@ -43,20 +54,31 @@ public class UserController {
 
     @PostMapping("/registration")
     public String saveUser(UserDTO userDTO) {
-        userService.saveUser(userDTO);
-        return "redirect:/login";
+        if (userService.checkIfUserExistsByLogin(userDTO.getLogin())) {
+            return "/usererror";
+        } else {
+            userService.saveUser(userDTO);
+            return "redirect:/login";
+        }
+    }
+
+    @GetMapping("/useredit")
+    public String editUser(@RequestParam("userId") int id, ModelMap modelMap) {
+        modelMap.addAttribute("user", new UserDTO());
+        modelMap.put("user", userService.findById(id));
+        return "/useredit";
+    }
+
+    @PostMapping("/useredit")
+    public String saveEditUser(@RequestParam("userId") int id, UserDTO userDTO) {
+        userService.updateUser(userDTO, userService.findById(id));
+        return "redirect:/usersucces";
     }
 
     @GetMapping("/login")
     public String login(ModelMap modelMap) {
         modelMap.addAttribute("login", new User());
         return "/login";
-    }
-
-    @PostMapping("/login")
-    public String getLoginAndPassword(User user) {
-        userService.findByLoginAndPassword(user.getLogin(), user.getPassword());
-        return "/userpage";
     }
 
     @GetMapping("/logout")
@@ -72,5 +94,11 @@ public class UserController {
     public String showClientPage(ModelMap modelMap) {
         modelMap.put("user", userService.findCurrentUser());
         return "/userpage";
+    }
+
+    @GetMapping("/userlist")
+    public String showClientsList(ModelMap modelMap) {
+        modelMap.put("users", userService.findAll());
+        return "/userlist";
     }
 }

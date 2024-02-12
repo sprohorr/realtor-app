@@ -3,8 +3,6 @@ package org.example.dto;
 import org.example.entity.Building;
 import org.example.entity.RealtyAgent;
 
-import java.util.Objects;
-
 public class ApartmentDTO {
 
     private int id;
@@ -96,16 +94,4 @@ public class ApartmentDTO {
         this.realtyAgent = realtyAgent;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ApartmentDTO that = (ApartmentDTO) o;
-        return id == that.id && number == that.number && quantityRooms == that.quantityRooms && Double.compare(that.area, area) == 0 && Double.compare(that.price, price) == 0 && status == that.status && Objects.equals(description, that.description) && Objects.equals(building, that.building) && Objects.equals(realtyAgent, that.realtyAgent);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, number, quantityRooms, area, price, status, description, building, realtyAgent);
-    }
 }

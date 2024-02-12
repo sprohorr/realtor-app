@@ -19,11 +19,6 @@ public class CustomUserDetailsManager implements UserDetailsService {
     @Autowired
     protected UserRepository userRepository;
 
-    @Autowired
-    public CustomUserDetailsManager(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userRepository.findByLogin(login);

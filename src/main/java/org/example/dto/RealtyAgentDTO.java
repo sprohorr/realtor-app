@@ -1,8 +1,6 @@
 package org.example.dto;
 
 
-import java.util.Objects;
-
 public class RealtyAgentDTO {
 
     private int id;
@@ -56,16 +54,4 @@ public class RealtyAgentDTO {
         this.address = address;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RealtyAgentDTO that = (RealtyAgentDTO) o;
-        return id == that.id && tel == that.tel && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(address, that.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, tel, email, address);
-    }
 }
