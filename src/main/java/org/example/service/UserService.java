@@ -30,7 +30,7 @@ public class UserService {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
-    final Integer USER_ROLE = 2;
+    public final static Integer USER_ROLE = 2;
 
     public User saveUser(UserDTO userDTO) {
         org.example.entity.User user = new org.example.entity.User();
