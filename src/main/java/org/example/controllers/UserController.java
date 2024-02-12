@@ -1,6 +1,5 @@
 package org.example.controllers;
 
-import org.example.config.CustomUserDetailsManager;
 import org.example.dto.UserDTO;
 import org.example.entity.User;
 import org.example.service.UserService;
@@ -22,9 +21,6 @@ public class UserController {
 
     @Autowired
     protected UserService userService;
-
-    @Autowired
-    protected CustomUserDetailsManager customUserDetailsManager;
 
     @GetMapping("/mainpage")
     private String showMainPage() {
@@ -71,8 +67,8 @@ public class UserController {
 
     @PostMapping("/useredit")
     public String saveEditUser(@RequestParam("userId") int id, UserDTO userDTO) {
-        userService.updateUser(userDTO, userService.findById(id));
-        return "redirect:/usersucces";
+        userService.updateUser(userDTO, id);
+        return "redirect:/usersuccess";
     }
 
     @GetMapping("/login")
@@ -87,7 +83,7 @@ public class UserController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "/logout";
+        return "/mainpage";
     }
 
     @GetMapping("/userpage")

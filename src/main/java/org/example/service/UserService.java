@@ -30,19 +30,21 @@ public class UserService {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
+    final Integer USER_ROLE = 2;
+
     public User saveUser(UserDTO userDTO) {
-        int id = 2;
         org.example.entity.User user = new org.example.entity.User();
         user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRole(roleRepository.findById(id).orElse(null));
+        user.setRole(roleRepository.findById(USER_ROLE).orElse(null));
         return userRepository.save(transformerDTOUser
                 .populateBeanFromDTO(user, userDTO));
     }
 
-    public User updateUser(UserDTO userDTO, User user) {
+    public User updateUser(UserDTO userDTO, int id) {
+        User user = userRepository.findById(id).orElse(null);
         user.setUpdateTime(LocalDateTime.now());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         return userRepository.save(transformerDTOUser
                 .populateBeanFromDTO(user, userDTO));
     }
@@ -54,14 +56,6 @@ public class UserService {
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
-
-//    public User findByLoginAndPassword(String login, String password) {
-//        User user = findByLogin(login);
-//        if (user != null) {
-//            if (passwordEncoder.matches(password, user.getPassword())) ;
-//        }
-//        return null;
-//    }
 
     public User findCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
