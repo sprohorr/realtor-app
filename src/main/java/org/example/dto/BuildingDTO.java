@@ -1,7 +1,5 @@
 package org.example.dto;
 
-import java.util.Objects;
-
 public class BuildingDTO {
 
     private int id;
@@ -94,16 +92,4 @@ public class BuildingDTO {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BuildingDTO that = (BuildingDTO) o;
-        return id == that.id && floors == that.floors && Double.compare(that.landArea, landArea) == 0 && Double.compare(that.buildingArea, buildingArea) == 0 && quantityApartments == that.quantityApartments && year == that.year && parking == that.parking && Objects.equals(address, that.address) && Objects.equals(description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, address, floors, landArea, buildingArea, quantityApartments, year, parking, description);
-    }
 }

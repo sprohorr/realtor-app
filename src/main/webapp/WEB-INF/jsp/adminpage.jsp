@@ -28,6 +28,6 @@
     <br/>
     <br/>
 </div>
-
+<a href="/logout"><p align="center">Log out</p></a>
 </body>
 </html>
