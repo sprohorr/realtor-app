@@ -30,8 +30,9 @@ public class ApartmentService {
         return apartmentRepository.findAllByRealtyAgent_Id(id);
     }
 
-    public Apartment saveApartment(ApartmentDTO apartmentDTO) {
+    public Apartment saveApartment(int agentId, ApartmentDTO apartmentDTO) {
         Apartment apartment = new Apartment();
+        apartment.setRealtyAgent(realtyAgentRepository.findById(agentId).orElse(null));
         return apartmentRepository
                 .save(transformerDtoApartment.populateBeanFromDTO(apartment, apartmentDTO));
     }
@@ -40,5 +41,9 @@ public class ApartmentService {
         return apartmentRepository
                 .save(transformerDtoApartment
                         .populateBeanFromDTO(apartmentRepository.findById(apartmentId).orElse(null), apartmentDTO));
+    }
+
+    public boolean checkIfApartmentByNumber(int number) {
+        return apartmentRepository.existsApartmentByNumber(number);
     }
 }

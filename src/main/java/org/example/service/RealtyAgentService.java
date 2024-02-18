@@ -24,6 +24,10 @@ public class RealtyAgentService {
                 .save(transformerDtoRealtyAgent.populateBeanFromDTO(realtyAgent, realtyAgentDTO));
     }
 
+    public boolean checkIfRealtyAgentExistsByName(String name) {
+        return realtyAgentRepository.existsRealtyAgentByName(name);
+    }
+
     public List<RealtyAgent> findAll() {
         return realtyAgentRepository.findAll();
     }

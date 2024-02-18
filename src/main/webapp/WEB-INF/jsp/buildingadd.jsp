@@ -14,22 +14,40 @@
     <form:form action="/buildingadd" method="post" modelAttribute="building">
         <table align="center" border="2px">
             <tr>
-                <td><form:input path="address"/>Address</td>
+                <td><form:input path="address"/>Address
+                    <br/>
+                    <form:errors cssStyle="color: red" path="address"/>
+                </td>
             </tr>
             <tr>
-                <td><form:input path="floors"/>Quantity floors</td>
+                <td><form:input path="floors"/>Quantity floors
+                    <br/>
+                    <form:errors cssStyle="color: red" path="floors"/>
+                </td>
             </tr>
             <tr>
-                <td><form:input path="landArea"/>Land area</td>
+                <td><form:input path="landArea"/>Land area
+                    <br/>
+                    <form:errors cssStyle="color: red" path="landArea"/>
+                </td>
             </tr>
             <tr>
-                <td><form:input path="buildingArea"/>Building Area</td>
+                <td><form:input path="buildingArea"/>Building Area
+                    <br/>
+                    <form:errors cssStyle="color: red" path="buildingArea"/>
+                </td>
             </tr>
             <tr>
-                <td><form:input path="quantityApartments"/>Quantity apartments</td>
+                <td><form:input path="quantityApartments"/>Quantity apartments
+                    <br/>
+                    <form:errors cssStyle="color: red" path="quantityApartments"/>
+                </td>
             </tr>
             <tr>
-                <td><form:input path="year"/>Year build</td>
+                <td><form:input path="year"/>Year build
+                    <br/>
+                    <form:errors cssStyle="color: red" path="year"/>
+                </td>
             </tr>
             <tr>
                 <td><form:input path="description"/>Description</td>
@@ -47,6 +65,7 @@
             </tr>
         </table>
     </form:form>
+    <a href="/adminpage"><p align="center">Admin page</p></a>
 </div>
 </body>
 </html>

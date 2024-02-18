@@ -2,20 +2,33 @@ package org.example.dto;
 
 import org.example.entity.Role;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class UserDTO {
 
     private int id;
 
+    @NotEmpty(message = "Name must not be empty!")
+    @Size(min = 2, max = 20, message = "Enter min = 2, max = 20 symbols!")
     private String name;
 
+    @NotEmpty(message = "Surname must not be empty!")
+    @Size(min = 2, max = 20, message = "Enter min = 2, max = 20 symbols!")
     private String surname;
 
+    @NotEmpty(message = "Email must not be empty!")
+    @Email(message = "Invalid!")
     private String email;
 
+    @NotEmpty(message = "Login must not be empty!")
+    @Size(min = 4, message = "Enter min = 4 symbols!")
     private String login;
 
+    @NotEmpty(message = "Password must not be empty!")
+    @Size(min = 8, message = "Password must be min 8 symbols!")
     private String password;
 
     private LocalDateTime createTime;

@@ -26,6 +26,7 @@
             </tr>
         </c:forEach>
     </table>
+    <a href="/adminpage"><p align="center">Admin page</p></a>
 </div>
 </body>
 </html>

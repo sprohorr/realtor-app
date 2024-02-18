@@ -6,9 +6,13 @@ import org.example.service.RealtyAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class ApartmentController {
@@ -28,15 +32,24 @@ public class ApartmentController {
 
     @GetMapping("/apartmentadd")
     public String addApartment(@RequestParam("agentId") int agentId, ModelMap modelMap) {
-        modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
         modelMap.addAttribute("apartment", new ApartmentDTO());
+        modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
         return "/apartmentadd";
     }
 
     @PostMapping("/apartmentadd")
-    public String saveApartment(ApartmentDTO apartmentDTO) {
-        apartmentService.saveApartment(apartmentDTO);
-        return "redirect:/agentlist";
+    public String saveApartment(@RequestParam("agentId") int agentId,
+                                @ModelAttribute("apartment") @Valid ApartmentDTO apartmentDTO,
+                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/apartmentadd";
+        }
+        if (apartmentService.checkIfApartmentByNumber(apartmentDTO.getNumber())) {
+            return "/apartmenterror";
+        } else {
+            apartmentService.saveApartment(agentId, apartmentDTO);
+            return "redirect:/apartmentsuccess";
+        }
     }
 
     @GetMapping("/apartmentedit")
@@ -47,8 +60,24 @@ public class ApartmentController {
     }
 
     @PostMapping("/apartmentedit")
-    public String saveEditApartment(@RequestParam("apartmentId") int apartmentId, ApartmentDTO apartmentDTO) {
-        apartmentService.editApartment(apartmentId, apartmentDTO);
-        return "redirect:/agentlist";
+    public String saveEditApartment(@RequestParam("apartmentId") int apartmentId,
+                                    @ModelAttribute("apartment") @Valid ApartmentDTO apartmentDTO,
+                                    BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/apartmentedit";
+        } else {
+            apartmentService.editApartment(apartmentId, apartmentDTO);
+            return "redirect:/agentlist";
+        }
+    }
+
+    @GetMapping("/apartmentsuccess")
+    public String successfully() {
+        return "/apartmentsuccess";
+    }
+
+    @GetMapping("/apartmenterror")
+    public String error() {
+        return "/apartmenterror";
     }
 }

@@ -3,16 +3,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Edit realty agent</title>
+    <title>Edit</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">Edit realty agent</h2></div>
+<div><h2 align="center">Edit user</h2></div>
 <div>
-    <form:form action="${pageContext.request.contextPath}/agentedit" method="post" modelAttribute="agent">
+    <form:form action="/useredit" method="post" modelAttribute="user">
+        <input type="hidden" name="userId" value="${user.id}"/>
+        <input type="hidden" name="login" value="${user.login}"/>
+        <input type="hidden" name="password" value="${user.password}"/>
         <table align="center" border="2px">
-            <tr>
-                <td><input type="hidden" name="agentId" value="${agent.id}"/></td>
-            </tr>
             <tr>
                 <td><form:input path="name"/>Name
                     <br/>
@@ -20,9 +20,9 @@
                 </td>
             </tr>
             <tr>
-                <td><form:input path="tel"/>Number phone
+                <td><form:input path="surname"/>Number phone
                     <br/>
-                    <form:errors cssStyle="color: red" path="tel"/>
+                    <form:errors cssStyle="color: red" path="surname"/>
                 </td>
             </tr>
             <tr>
@@ -32,19 +32,13 @@
                 </td>
             </tr>
             <tr>
-                <td><form:input path="address"/>Address
-                    <br/>
-                    <form:errors cssStyle="color: red" path="address"/>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     <button type="submit">Edit</button>
                 </td>
             </tr>
         </table>
     </form:form>
-    <a href="/adminpage"><p align="center">Admin page</p></a>
+    <a href="/userpage"><p align="center">User page</p></a>
 </div>
 </body>
 </html>

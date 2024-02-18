@@ -8,7 +8,7 @@
 <body style="background-color: lavender">
 <div><h2 align="center">Registration</h2></div>
 <div>
-    <form:form action="/registration" method="post" modelAttribute="user">
+    <form:form action="/registrationadmin" method="post" modelAttribute="admin">
         <table border="2px" align="center">
             <tr>
                 <td>

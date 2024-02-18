@@ -19,6 +19,9 @@
         <tr>
             <td><c:out value="Email: ${user.email}"/></td>
         </tr>
+        <tr>
+            <td><a href="/useredit?userId=${user.id}">Edit</a></td>
+        </tr>
     </table>
 </div>
 <div><a href="/logout">Log out</a>

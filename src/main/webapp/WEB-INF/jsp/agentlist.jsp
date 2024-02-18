@@ -10,13 +10,12 @@
     <table border="2px" align="center">
         <c:forEach items="${agent}" var="agent">
             <tr>
-                <td><c:out value="Name: ${agent.name}"/></td>
-                <td><a href="/agentaccountpage?agentId=${agent.id}">Account page</a></td>
-                <td><a href="/apartmentlist?agentId=${agent.id}">List of apartment</a></td>
+                <td><a href="/agentpage?agentId=${agent.id}"><c:out value="Name:${agent.name}"/></a></td>
             </tr>
             <br/>
         </c:forEach>
     </table>
+    <a href="/adminpage"><p align="center">Return to back</p></a>
 </div>
 </body>
 </html>

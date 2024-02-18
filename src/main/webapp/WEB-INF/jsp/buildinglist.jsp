@@ -30,5 +30,6 @@
     </table>
 </div>
 <a href="/buildingadd"><p>Add new building</p></a>
+<a href="/adminpage"><p align="center">Admin page</p></a>
 </body>
 </html>

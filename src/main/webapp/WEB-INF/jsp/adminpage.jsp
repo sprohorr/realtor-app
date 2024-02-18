@@ -1,10 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Admin page</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">Admin page</h2></div>
+<div><h2 align="center"><c:out value="Admin ${user.login}"/></h2></div>
 <div>
     <h2 align="center" style="color: slateblue">Realty agent</h2>
     <table border="2px" align="center">
@@ -27,7 +28,14 @@
     </table>
     <br/>
     <br/>
+    <h2 align="center" style="color: slateblue">Users</h2>
+    <table border="2px" align="center">
+        <tr>
+            <td><a href="/userlist">Users list</a></td>
+        </tr>
+    </table>
 </div>
 <a href="/logout"><p align="center">Log out</p></a>
+<a href="/registrationadmin"><p align="center">Add new admin</p></a>
 </body>
 </html>

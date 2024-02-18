@@ -31,6 +31,7 @@
             <td><a href="/apartmentlist?agentId=${agent.id}">Apartments of list this agent</a></td>
         </tr>
     </table>
+    <a href="/adminpage"><p align="center">Admin page</p></a>
 </div>
 </body>
 </html>
