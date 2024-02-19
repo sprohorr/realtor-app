@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class TransformerDtoApartment {
 
     public Apartment populateBeanFromDTO(Apartment apartment, ApartmentDTO apartmentDTO) {
-        apartment.setBuilding(apartmentDTO.getBuilding());
+        apartment.setRealtyAgent(apartmentDTO.getRealtyAgent());
         apartment.setNumber(apartmentDTO.getNumber());
         apartment.setQuantityRooms(apartmentDTO.getQuantityRooms());
         apartment.setArea(apartmentDTO.getArea());

@@ -25,7 +25,6 @@ public class ApartmentDTO {
 
     private String description;
 
-    @NotNull(message = "Null!")
     private Building building;
 
     private RealtyAgent realtyAgent;

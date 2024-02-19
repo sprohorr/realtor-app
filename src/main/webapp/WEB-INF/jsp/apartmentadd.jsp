@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -6,15 +7,22 @@
     <title>Add new apartment</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">Add new apartment. Realty Agent ${agent.name}</h2></div>
+<div><h2 align="center">Add new apartment. Address ${building.address}</h2></div>
 <div>
     <form:form action="/apartmentadd" method="post" modelAttribute="apartment">
-        <input type="hidden" name="agentId" value="${apartment.realtyAgent.id}"/>
+        <input type="hidden" name="buildingId" value="${building.id}"/>
         <table align="center" border="2px">
             <tr>
-                <td><form:input path="building.id"/>Id building
+                <td>
+                    <form:label path="realtyAgent.id">Agent:</form:label>
+                    <form:select path="realtyAgent.id">
+                        <form:option value="2">Select agent</form:option>
+                        <c:forEach items="${listagent}" var="agent">
+                            <form:option value="${agent.id}">${agent.name}</form:option>
+                        </c:forEach>
+                    </form:select>
                     <br/>
-                    <form:errors cssStyle="color: red" path="building.id"/>
+                    <form:errors cssStyle="color: red" path="realtyAgent.id"/>
                 </td>
             </tr>
             <tr>

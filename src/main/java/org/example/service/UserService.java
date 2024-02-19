@@ -44,7 +44,7 @@ public class UserService {
     }
 
     public User saveAdmin(UserDTO userDTO) {
-        org.example.entity.User user = new org.example.entity.User();
+        User user = new User();
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -54,7 +54,7 @@ public class UserService {
     }
 
     public User updateUser(UserDTO userDTO, int id) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).get();
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());

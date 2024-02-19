@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import org.example.dto.ApartmentDTO;
 import org.example.service.ApartmentService;
+import org.example.service.BuildingService;
 import org.example.service.RealtyAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class ApartmentController {
     @Autowired
     protected RealtyAgentService realtyAgentService;
 
+    @Autowired
+    protected BuildingService buildingService;
+
     @GetMapping("/apartmentlist")
     public String showApartments(@RequestParam("agentId") int agentId, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
@@ -31,23 +35,24 @@ public class ApartmentController {
     }
 
     @GetMapping("/apartmentadd")
-    public String addApartment(@RequestParam("agentId") int agentId, ModelMap modelMap) {
+    public String addApartment(@RequestParam("buildingId") int buildingId, ModelMap modelMap) {
         modelMap.addAttribute("apartment", new ApartmentDTO());
-        modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
+        modelMap.put("building", buildingService.findBuildingById(buildingId));
+        modelMap.put("listagent", realtyAgentService.findAll());
         return "/apartmentadd";
     }
 
     @PostMapping("/apartmentadd")
-    public String saveApartment(@RequestParam("agentId") int agentId,
+    public String saveApartment(@RequestParam("buildingId") int buildingId,
                                 @ModelAttribute("apartment") @Valid ApartmentDTO apartmentDTO,
                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/apartmentadd";
         }
-        if (apartmentService.checkIfApartmentByNumber(apartmentDTO.getNumber())) {
+        if (apartmentService.checkIfApartmentByBuildingIdAndNumber(buildingId, apartmentDTO.getNumber())) {
             return "/apartmenterror";
         } else {
-            apartmentService.saveApartment(agentId, apartmentDTO);
+            apartmentService.saveApartment(buildingId, apartmentDTO);
             return "redirect:/apartmentsuccess";
         }
     }

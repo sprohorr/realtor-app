@@ -3,7 +3,7 @@ package org.example.service;
 import org.example.dto.ApartmentDTO;
 import org.example.entity.Apartment;
 import org.example.repository.ApartmentRepository;
-import org.example.repository.RealtyAgentRepository;
+import org.example.repository.BuildingRepository;
 import org.example.util.TransformerDtoApartment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class ApartmentService {
     protected ApartmentRepository apartmentRepository;
 
     @Autowired
-    protected RealtyAgentRepository realtyAgentRepository;
+    protected BuildingRepository buildingRepository;
 
     @Autowired
     protected TransformerDtoApartment transformerDtoApartment;
@@ -30,9 +30,9 @@ public class ApartmentService {
         return apartmentRepository.findAllByRealtyAgent_Id(id);
     }
 
-    public Apartment saveApartment(int agentId, ApartmentDTO apartmentDTO) {
+    public Apartment saveApartment(int buildingId, ApartmentDTO apartmentDTO) {
         Apartment apartment = new Apartment();
-        apartment.setRealtyAgent(realtyAgentRepository.findById(agentId).orElse(null));
+        apartment.setBuilding(buildingRepository.findById(buildingId).orElse(null));
         return apartmentRepository
                 .save(transformerDtoApartment.populateBeanFromDTO(apartment, apartmentDTO));
     }
@@ -43,7 +43,7 @@ public class ApartmentService {
                         .populateBeanFromDTO(apartmentRepository.findById(apartmentId).orElse(null), apartmentDTO));
     }
 
-    public boolean checkIfApartmentByNumber(int number) {
-        return apartmentRepository.existsApartmentByNumber(number);
+    public boolean checkIfApartmentByBuildingIdAndNumber(int buildingId, int number) {
+        return apartmentRepository.existsApartmentByBuilding_IdAndNumber(buildingId, number);
     }
 }
