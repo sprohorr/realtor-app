@@ -5,7 +5,10 @@
     <title>Admin page</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center"><c:out value="Admin ${user.login}"/></h2></div>
+<div align="center">
+    <jsp:include page="userpage.jsp"></jsp:include>
+</div>
+<a href="/registrationadmin"><p align="center">Add new admin</p></a>
 <div>
     <h2 align="center" style="color: slateblue">Realty agent</h2>
     <table border="2px" align="center">
@@ -27,7 +30,6 @@
         </tr>
     </table>
     <br/>
-    <br/>
     <h2 align="center" style="color: slateblue">Users</h2>
     <table border="2px" align="center">
         <tr>
@@ -35,7 +37,5 @@
         </tr>
     </table>
 </div>
-<a href="/logout"><p align="center">Log out</p></a>
-<a href="/registrationadmin"><p align="center">Add new admin</p></a>
 </body>
 </html>

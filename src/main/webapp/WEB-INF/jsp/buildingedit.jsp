@@ -8,28 +8,40 @@
 <body style="background-color: lavender">
 <div><h2 align="center">Edit building</h2></div>
 <div>
-    <form:form action="${pageContext.request.contextPath}/buildingedit" method="post" modelAttribute="building">
+    <form:form action="/buildingedit" method="post" modelAttribute="building">
         <table align="center" border="2px">
             <tr>
                 <td><input type="hidden" name="buildingId" value="${building.id}"/></td>
             </tr>
             <tr>
-                <td><form:input path="address"/>Address</td>
+                <td><form:input path="address"/>Address
+                    <br/>
+                    <form:errors cssStyle="color: red" path="address"/></td>
             </tr>
             <tr>
-                <td><form:input path="floors"/>Quantity floors</td>
+                <td><form:input path="floors"/>Quantity floors
+                    <br/>
+                    <form:errors cssStyle="color: red" path="floors"/></td>
             </tr>
             <tr>
-                <td><form:input path="landArea"/>Land area</td>
+                <td><form:input path="landArea"/>Land area
+                    <br/>
+                    <form:errors cssStyle="color: red" path="landArea"/></td>
             </tr>
             <tr>
-                <td><form:input path="buildingArea"/>Building Area</td>
+                <td><form:input path="buildingArea"/>Building Area
+                    <br/>
+                    <form:errors cssStyle="color: red" path="buildingArea"/></td>
             </tr>
             <tr>
-                <td><form:input path="quantityApartments"/>Quantity apartments</td>
+                <td><form:input path="quantityApartments"/>Quantity apartments
+                    <br/>
+                    <form:errors cssStyle="color: red" path="quantityApartments"/></td>
             </tr>
             <tr>
-                <td><form:input path="year"/>Year build</td>
+                <td><form:input path="year"/>Year build
+                    <br/>
+                    <form:errors cssStyle="color: red" path="year"/></td>
             </tr>
             <tr>
                 <td><form:input path="description"/>Description</td>

@@ -48,6 +48,6 @@ public class BuildingService {
     public Building editBuilding(int id, BuildingDTO buildingDTO) {
         return buildingRepository.save(transformerDtoBuilding
                 .populateBeanFromDTO(buildingRepository
-                        .findById(id).orElse(null), buildingDTO));
+                        .findById(id).get(), buildingDTO));
     }
 }

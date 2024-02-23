@@ -7,7 +7,7 @@
     <title>Add new apartment</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">Add new apartment. Address ${building.address}</h2></div>
+<div><h2 align="center">Add new apartment. ${building.address}</h2></div>
 <div>
     <form:form action="/apartmentadd" method="post" modelAttribute="apartment">
         <input type="hidden" name="buildingId" value="${building.id}"/>
@@ -21,8 +21,6 @@
                             <form:option value="${agent.id}">${agent.name}</form:option>
                         </c:forEach>
                     </form:select>
-                    <br/>
-                    <form:errors cssStyle="color: red" path="realtyAgent.id"/>
                 </td>
             </tr>
             <tr>

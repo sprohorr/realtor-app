@@ -22,6 +22,10 @@ public class ApartmentService {
     @Autowired
     protected TransformerDtoApartment transformerDtoApartment;
 
+    public List<Apartment> findAll() {
+        return apartmentRepository.findAll();
+    }
+
     public Apartment findApartmentById(int id) {
         return apartmentRepository.findById(id).orElse(null);
     }
@@ -32,15 +36,17 @@ public class ApartmentService {
 
     public Apartment saveApartment(int buildingId, ApartmentDTO apartmentDTO) {
         Apartment apartment = new Apartment();
-        apartment.setBuilding(buildingRepository.findById(buildingId).orElse(null));
+        apartment.setBuilding(buildingRepository.findById(buildingId).get());
         return apartmentRepository
                 .save(transformerDtoApartment.populateBeanFromDTO(apartment, apartmentDTO));
     }
 
     public Apartment editApartment(int apartmentId, ApartmentDTO apartmentDTO) {
+        Apartment apartment = apartmentRepository.findById(apartmentId).get();
+        apartment.setBuilding(apartmentDTO.getBuilding());
         return apartmentRepository
                 .save(transformerDtoApartment
-                        .populateBeanFromDTO(apartmentRepository.findById(apartmentId).orElse(null), apartmentDTO));
+                        .populateBeanFromDTO(apartment, apartmentDTO));
     }
 
     public boolean checkIfApartmentByBuildingIdAndNumber(int buildingId, int number) {

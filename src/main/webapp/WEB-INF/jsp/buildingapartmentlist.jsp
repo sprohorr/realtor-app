@@ -19,7 +19,7 @@
                 <td><c:out value="Area: ${apartment.area}"/></td>
                 <td><c:out value="Price: ${apartment.price}"/></td>
                 <td><c:out value="Description: ${apartment.description}"/></td>
-                <td><c:set var="status">${apartment.status ? "Open" : "Close"}</c:set>
+                <td><c:set var="status">${apartment.status ? "Active" : "Close"}</c:set>
                     <c:out value="Status: ${status}"/>
                 </td>
                 <td><a href="/apartmentedit?apartment.id=${apartment.id}">Edit</a></td>

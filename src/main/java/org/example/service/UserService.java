@@ -38,7 +38,7 @@ public class UserService {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRole(roleRepository.findById(USER_ROLE).orElse(null));
+        user.setRole(roleRepository.findById(USER_ROLE).get());
         return userRepository.save(transformerDTOUser
                 .populateBeanFromDTO(user, userDTO));
     }
@@ -48,7 +48,7 @@ public class UserService {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRole(roleRepository.findById(ADMIN_ROLE).orElse(null));
+        user.setRole(roleRepository.findById(ADMIN_ROLE).get());
         return userRepository.save(transformerDTOUser
                 .populateBeanFromDTO(user, userDTO));
     }

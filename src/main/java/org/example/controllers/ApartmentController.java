@@ -27,6 +27,12 @@ public class ApartmentController {
     @Autowired
     protected BuildingService buildingService;
 
+    @GetMapping("/userreviewapartment")
+    public String reviewApartment(ModelMap modelMap) {
+        modelMap.put("apartments", apartmentService.findAll());
+        return "/userreviewapartment";
+    }
+
     @GetMapping("/apartmentlist")
     public String showApartments(@RequestParam("agentId") int agentId, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
@@ -44,7 +50,8 @@ public class ApartmentController {
 
     @PostMapping("/apartmentadd")
     public String saveApartment(@RequestParam("buildingId") int buildingId,
-                                @ModelAttribute("apartment") @Valid ApartmentDTO apartmentDTO,
+                                @ModelAttribute("apartment")
+                                @Valid ApartmentDTO apartmentDTO,
                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/apartmentadd";
@@ -61,15 +68,21 @@ public class ApartmentController {
     public String editApartment(@RequestParam("apartmentId") int apartmentId, ModelMap modelMap) {
         modelMap.addAttribute("apartment", new ApartmentDTO());
         modelMap.put("apartment", apartmentService.findApartmentById(apartmentId));
+        modelMap.put("listagent", realtyAgentService.findAll());
+        modelMap.put("listbuilding", buildingService.findAllBuilding());
         return "/apartmentedit";
     }
 
     @PostMapping("/apartmentedit")
     public String saveEditApartment(@RequestParam("apartmentId") int apartmentId,
-                                    @ModelAttribute("apartment") @Valid ApartmentDTO apartmentDTO,
+                                    @ModelAttribute("apartment")
+                                    @Valid ApartmentDTO apartmentDTO,
                                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/apartmentedit";
+        }
+        if (apartmentService.checkIfApartmentByBuildingIdAndNumber(apartmentDTO.getBuilding().getId(), apartmentDTO.getNumber())) {
+            return "/apartmenterror";
         } else {
             apartmentService.editApartment(apartmentId, apartmentDTO);
             return "redirect:/agentlist";

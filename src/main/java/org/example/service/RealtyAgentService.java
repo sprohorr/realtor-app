@@ -36,8 +36,8 @@ public class RealtyAgentService {
         return realtyAgentRepository.findById(id).orElse(null);
     }
 
-    public RealtyAgent editAgent(int id, RealtyAgentDTO realtyAgentDTO) {
+    public RealtyAgent editAgent(int agentId, RealtyAgentDTO realtyAgentDTO) {
         return realtyAgentRepository.save(transformerDtoRealtyAgent
-                .populateBeanFromDTO(realtyAgentRepository.findById(id).orElse(null), realtyAgentDTO));
+                .populateBeanFromDTO(realtyAgentRepository.findById(agentId).get(), realtyAgentDTO));
     }
 }

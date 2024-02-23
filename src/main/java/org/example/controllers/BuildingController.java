@@ -19,6 +19,12 @@ public class BuildingController {
     @Autowired
     protected BuildingService buildingService;
 
+    @GetMapping("/userreviewbuilding")
+    public String reviewBuilding(ModelMap modelMap) {
+        modelMap.put("buildings", buildingService.findAllBuilding());
+        return "/userreviewbuilding";
+    }
+
     @GetMapping("/buildingapartmentlist")
     public String showApartmentsListFromBuilding(@RequestParam("buildingId") int buildingId, ModelMap modelMap) {
         modelMap.put("apartments", buildingService.findApartmentsFromBuilding(buildingId));
@@ -45,7 +51,6 @@ public class BuildingController {
         }
     }
 
-
     @GetMapping("/buildingsuccess")
     public String showSuccess() {
         return "/buildingsuccess";
@@ -65,7 +70,12 @@ public class BuildingController {
     }
 
     @PostMapping("/buildingedit")
-    public String saveEditBuilding(@RequestParam("buildingId") int id, BuildingDTO buildingDTO) {
+    public String saveEditBuilding(@RequestParam("buildingId") int id,
+                                   @ModelAttribute("building")
+                                   @Valid BuildingDTO buildingDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/buildingedit";
+        }
         buildingService.editBuilding(id, buildingDTO);
         return "redirect:/buildinglist";
     }

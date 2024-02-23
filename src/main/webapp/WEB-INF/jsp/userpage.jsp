@@ -6,8 +6,7 @@
     <title>Client page</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">User page</h2></div>
-
+<div><h2>${user.role.name} ${user.login}</h2></div>
 <div>
     <table border="2px">
         <tr>
@@ -26,6 +25,5 @@
 </div>
 <div><a href="/logout">Log out</a>
 </div>
-
 </body>
 </html>
