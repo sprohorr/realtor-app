@@ -28,6 +28,7 @@ public class BuildingController {
     @GetMapping("/buildingapartmentlist")
     public String showApartmentsListFromBuilding(@RequestParam("buildingId") int buildingId, ModelMap modelMap) {
         modelMap.put("apartments", buildingService.findApartmentsFromBuilding(buildingId));
+        modelMap.put("building", buildingService.findBuildingById(buildingId));
         return "/buildingapartmentlist";
     }
 

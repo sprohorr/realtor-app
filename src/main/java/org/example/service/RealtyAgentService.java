@@ -40,4 +40,8 @@ public class RealtyAgentService {
         return realtyAgentRepository.save(transformerDtoRealtyAgent
                 .populateBeanFromDTO(realtyAgentRepository.findById(agentId).get(), realtyAgentDTO));
     }
+
+    public RealtyAgent findRealtyAgentByName(String name) {
+        return realtyAgentRepository.findRealtyAgentByName(name);
+    }
 }

@@ -37,6 +37,10 @@ public class BuildingService {
         return buildingRepository.existsBuildingByAddress(address);
     }
 
+    public Building findBuildingByAddress(String address) {
+        return buildingRepository.findBuildingByAddress(address);
+    }
+
     public List<Building> findAllBuilding() {
         return buildingRepository.findAll();
     }

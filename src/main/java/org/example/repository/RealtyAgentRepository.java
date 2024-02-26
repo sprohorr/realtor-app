@@ -7,4 +7,6 @@ public interface RealtyAgentRepository extends JpaRepository<RealtyAgent, Intege
 
     boolean existsRealtyAgentByName(String name);
 
+    RealtyAgent findRealtyAgentByName(String name);
+
 }

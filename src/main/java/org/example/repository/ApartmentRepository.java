@@ -11,6 +11,8 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
 
     List<Apartment> findAllByRealtyAgent_Id(int id);
 
+    Apartment findByBuilding_AddressAndAndNumber(String address, int number);
+
     boolean existsApartmentByBuilding_IdAndNumber(int buildingId, int number);
 
 }

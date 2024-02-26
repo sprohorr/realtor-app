@@ -34,6 +34,10 @@ public class ApartmentService {
         return apartmentRepository.findAllByRealtyAgent_Id(id);
     }
 
+    public List<Apartment> findAllApartmentByBuilding(int id) {
+        return apartmentRepository.findAllByBuilding_Id(id);
+    }
+
     public Apartment saveApartment(int buildingId, ApartmentDTO apartmentDTO) {
         Apartment apartment = new Apartment();
         apartment.setBuilding(buildingRepository.findById(buildingId).get());
@@ -47,6 +51,21 @@ public class ApartmentService {
         return apartmentRepository
                 .save(transformerDtoApartment
                         .populateBeanFromDTO(apartment, apartmentDTO));
+    }
+
+    public Apartment saveApartmentFromExcel(Apartment apartment) {
+        Apartment apartmentDB = apartmentRepository
+                .findByBuilding_AddressAndAndNumber
+                        (apartment.getBuilding().getAddress(), apartment.getNumber());
+        apartmentDB.setNumber(apartment.getNumber());
+        apartmentDB.setQuantityRooms(apartment.getQuantityRooms());
+        apartmentDB.setArea(apartment.getArea());
+        apartmentDB.setPrice(apartment.getPrice());
+        apartmentDB.setStatus(apartment.isStatus());
+        apartmentDB.setDescription(apartment.getDescription());
+        apartmentDB.setBuilding(apartment.getBuilding());
+        apartmentDB.setRealtyAgent(apartment.getRealtyAgent());
+        return apartmentRepository.save(apartmentDB);
     }
 
     public boolean checkIfApartmentByBuildingIdAndNumber(int buildingId, int number) {

@@ -14,14 +14,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().disable()
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/userpage", "/useredit").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/adminpage", "/registrationadmin",
                         "/agentpage", "/agentadd", "/agentedit", "/agentlist", "/agenterror",
                         "/apartmentadd", "/apartmentedit", "/apartmentlist", "/apartmenterror", "/apartmentsuccess",
                         "/buildingadd", "/buildingedit", "/buildingapartmentlist", "/buildinglist", "/buildingsuccess").hasRole("ADMIN")
                 .antMatchers("/usersuccess").hasRole("USER")
-                .antMatchers("/mainpage", "/registration").permitAll()
+                .antMatchers("/mainpage", "/registration", "/import", "/export").permitAll()
                 .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")

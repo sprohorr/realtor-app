@@ -26,6 +26,8 @@
             </tr>
         </c:forEach>
     </table>
+    <a href="/export?buildingId=${building.id}">Excel</a><br/>
+    <a href="/import">Import from excel</a>
     <a href="/adminpage"><p align="center">Admin page</p></a>
 </div>
 </body>
