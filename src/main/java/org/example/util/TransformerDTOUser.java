@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 public class TransformerDTOUser {
 
     public User populateBeanFromDTO(User user, UserDTO userDTO) {
-        user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
         user.setLogin(userDTO.getLogin());
         return user;
     }
+
 }

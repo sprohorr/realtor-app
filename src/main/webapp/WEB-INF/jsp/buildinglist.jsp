@@ -25,10 +25,12 @@
                 <td><c:out value="Description: ${building.description}"/></td>
                 <td><a href="/buildingedit?buildingId=${building.id}">Edit</a></td>
                 <td><a href="/buildingapartmentlist?buildingId=${building.id}">List apartments</a></td>
+                <td><a href="/apartmentadd?buildingId=${building.id}">Add new apartments</a></td>
             </tr>
         </c:forEach>
     </table>
 </div>
 <a href="/buildingadd"><p>Add new building</p></a>
+<a href="/adminpage"><p align="center">Admin page</p></a>
 </body>
 </html>

@@ -25,12 +25,10 @@
             <td><a href="/agentedit?agentId=${agent.id}">Edit</a></td>
         </tr>
         <tr>
-            <td><a href="/apartmentadd?agentId=${agent.id}">Add apartment for this agent</a></td>
-        </tr>
-        <tr>
             <td><a href="/apartmentlist?agentId=${agent.id}">Apartments of list this agent</a></td>
         </tr>
     </table>
+    <a href="/adminpage"><p align="center">Admin page</p></a>
 </div>
 </body>
 </html>

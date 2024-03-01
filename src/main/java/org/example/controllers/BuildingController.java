@@ -5,9 +5,13 @@ import org.example.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class BuildingController {
@@ -15,9 +19,16 @@ public class BuildingController {
     @Autowired
     protected BuildingService buildingService;
 
+    @GetMapping("/userreviewbuilding")
+    public String reviewBuilding(ModelMap modelMap) {
+        modelMap.put("buildings", buildingService.findAllBuilding());
+        return "/userreviewbuilding";
+    }
+
     @GetMapping("/buildingapartmentlist")
     public String showApartmentsListFromBuilding(@RequestParam("buildingId") int buildingId, ModelMap modelMap) {
         modelMap.put("apartments", buildingService.findApartmentsFromBuilding(buildingId));
+        modelMap.put("building", buildingService.findBuildingById(buildingId));
         return "/buildingapartmentlist";
     }
 
@@ -28,9 +39,17 @@ public class BuildingController {
     }
 
     @PostMapping("/buildingadd")
-    public String createBuilding(BuildingDTO buildingDTO) {
-        buildingService.saveBuilding(buildingDTO);
-        return "redirect:/buildingsuccess";
+    public String createBuilding(@ModelAttribute("building") @Valid BuildingDTO buildingDTO,
+                                 BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/buildingadd";
+        }
+        if (buildingService.checkIfBuildingExistsByAddress(buildingDTO.getAddress())) {
+            return "/buildingerror";
+        } else {
+            buildingService.saveBuilding(buildingDTO);
+            return "redirect:/buildingsuccess";
+        }
     }
 
     @GetMapping("/buildingsuccess")
@@ -52,7 +71,12 @@ public class BuildingController {
     }
 
     @PostMapping("/buildingedit")
-    public String saveEditBuilding(@RequestParam("buildingId") int id, BuildingDTO buildingDTO) {
+    public String saveEditBuilding(@RequestParam("buildingId") int id,
+                                   @ModelAttribute("building")
+                                   @Valid BuildingDTO buildingDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/buildingedit";
+        }
         buildingService.editBuilding(id, buildingDTO);
         return "redirect:/buildinglist";
     }

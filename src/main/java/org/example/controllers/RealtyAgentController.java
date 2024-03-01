@@ -5,9 +5,13 @@ import org.example.service.RealtyAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 public class RealtyAgentController {
@@ -22,9 +26,17 @@ public class RealtyAgentController {
     }
 
     @PostMapping("/agentadd")
-    public String createAgent(RealtyAgentDTO realtyAgentDTO) {
-        realtyAgentService.saveRealtyAgent(realtyAgentDTO);
-        return "redirect:/agentlist";
+    public String createAgent(@ModelAttribute("agent") @Valid RealtyAgentDTO realtyAgentDTO,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/agentadd";
+        }
+        if (realtyAgentService.checkIfRealtyAgentExistsByName(realtyAgentDTO.getName())) {
+            return "/agenterror";
+        } else {
+            realtyAgentService.saveRealtyAgent(realtyAgentDTO);
+            return "redirect:/agentsuccess";
+        }
     }
 
     @GetMapping("/agentlist")
@@ -34,8 +46,13 @@ public class RealtyAgentController {
     }
 
     @GetMapping("/agentsuccess")
-    public String showSuccess() {
+    public String successfully() {
         return "/agentsuccess";
+    }
+
+    @GetMapping("/agenterror")
+    public String error() {
+        return "/agenterror";
     }
 
     @GetMapping("/agentedit")
@@ -46,14 +63,20 @@ public class RealtyAgentController {
     }
 
     @PostMapping("/agentedit")
-    public String saveEditAgent(@RequestParam("agentId") int id, RealtyAgentDTO realtyAgentDTO) {
+    public String saveEditAgent(@RequestParam("agentId") int id,
+                                @ModelAttribute("agent") @Valid RealtyAgentDTO realtyAgentDTO,
+                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/agentedit";
+        }
         realtyAgentService.editAgent(id, realtyAgentDTO);
         return "redirect:/agentlist";
+
     }
 
-    @GetMapping("/agentaccountpage")
+    @GetMapping("/agentpage")
     public String showAccountPage(@RequestParam("agentId") int id, ModelMap modelMap) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(id));
-        return "/agentaccountpage";
+        return "agentpage";
     }
 }

@@ -1,18 +1,27 @@
 package org.example.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class RealtyAgentDTO {
 
     private int id;
 
+    @NotEmpty(message = "Name must not be empty!")
+    @Size(min = 2, max = 20, message = "Enter min = 2, max = 20 symbols!")
     private String name;
 
+    @NotEmpty(message = "Number phone must not be empty!")
+    @Size(min = 13, message = "Input min 13 numbers!")
     private String tel;
 
+    @NotEmpty(message = "Email must not be empty!")
+    @Email(message = "Invalid!")
     private String email;
 
+    @NotEmpty(message = "Address must not be empty!")
     private String address;
-
 
     public int getId() {
         return id;

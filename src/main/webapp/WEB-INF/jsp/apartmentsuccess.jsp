@@ -5,8 +5,8 @@
 </head>
 <body style="background-color: lavender">
 <div>
-    <h1 align="center">Save successfully!</h1>
+    <h2 style="color: slateblue" align="center">Add successfully!</h2>
 </div>
-<a href="/agentlist">List of agents</a>
+<a href="/agentlist"><p align="center">Realty agent list</p></a>
 </body>
 </html>

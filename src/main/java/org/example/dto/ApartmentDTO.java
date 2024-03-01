@@ -3,23 +3,36 @@ package org.example.dto;
 import org.example.entity.Building;
 import org.example.entity.RealtyAgent;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+
 public class ApartmentDTO {
 
     private int id;
 
+    @NotNull(message = "Input number!")
+    @Digits(integer = 3, fraction = 0, message = "No more than 3 digits!")
     private int number;
 
+    @NotNull(message = "Input quantity rooms!")
+    @Digits(integer = 2, fraction = 0, message = "No more than 1 digit!")
     private int quantityRooms;
 
+    @NotNull(message = "Input area!")
+    @Digits(integer = 3, fraction = 1, message = "For example: 123.4")
     private double area;
 
+    @NotNull
+    @Digits(integer = 7, fraction = 2, message = "For example: 1234567.89")
     private double price;
 
     private boolean status;
 
     private String description;
 
+
     private Building building;
+
     private RealtyAgent realtyAgent;
 
     public int getId() {

@@ -30,6 +30,7 @@ public class UserService {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
+    public final static Integer ADMIN_ROLE = 1;
     public final static Integer USER_ROLE = 2;
 
     public User saveUser(UserDTO userDTO) {
@@ -37,16 +38,30 @@ public class UserService {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRole(roleRepository.findById(USER_ROLE).orElse(null));
+        user.setRole(roleRepository.findById(USER_ROLE).get());
+        return userRepository.save(transformerDTOUser
+                .populateBeanFromDTO(user, userDTO));
+    }
+
+    public User saveAdmin(UserDTO userDTO) {
+        User user = new User();
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setRole(roleRepository.findById(ADMIN_ROLE).get());
         return userRepository.save(transformerDTOUser
                 .populateBeanFromDTO(user, userDTO));
     }
 
     public User updateUser(UserDTO userDTO, int id) {
-        User user = userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).get();
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setEmail(userDTO.getEmail());
         user.setUpdateTime(LocalDateTime.now());
-        return userRepository.save(transformerDTOUser
-                .populateBeanFromDTO(user, userDTO));
+        user.setLogin(user.getLogin());
+        user.setPassword(user.getPassword());
+        return userRepository.save(user);
     }
 
     public boolean checkIfUserExistsByLogin(String login) {

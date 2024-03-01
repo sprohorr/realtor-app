@@ -33,6 +33,14 @@ public class BuildingService {
                 .save(transformerDtoBuilding.populateBeanFromDTO(building, buildingDTO));
     }
 
+    public boolean checkIfBuildingExistsByAddress(String address) {
+        return buildingRepository.existsBuildingByAddress(address);
+    }
+
+    public Building findBuildingByAddress(String address) {
+        return buildingRepository.findBuildingByAddress(address);
+    }
+
     public List<Building> findAllBuilding() {
         return buildingRepository.findAll();
     }
@@ -44,6 +52,6 @@ public class BuildingService {
     public Building editBuilding(int id, BuildingDTO buildingDTO) {
         return buildingRepository.save(transformerDtoBuilding
                 .populateBeanFromDTO(buildingRepository
-                        .findById(id).orElse(null), buildingDTO));
+                        .findById(id).get(), buildingDTO));
     }
 }

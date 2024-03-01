@@ -1,19 +1,29 @@
 package org.example.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
 public class BuildingDTO {
 
     private int id;
 
+    @NotEmpty(message = "Address must not be empty! ")
     private String address;
 
+    @NotNull(message = "null!")
     private int floors;
 
+    @NotNull(message = "null!")
     private double landArea;
 
+    @NotNull(message = "null!")
     private double buildingArea;
 
+    @NotNull(message = "null!")
     private int quantityApartments;
 
+    @NotNull(message = "null!")
     private int year;
 
     private boolean parking;

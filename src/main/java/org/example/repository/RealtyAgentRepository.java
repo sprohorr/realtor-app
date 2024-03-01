@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RealtyAgentRepository extends JpaRepository<RealtyAgent, Integer> {
 
+    boolean existsRealtyAgentByName(String name);
+
+    RealtyAgent findRealtyAgentByName(String name);
+
 }

@@ -9,7 +9,6 @@ public class TransformerDtoApartment {
 
     public Apartment populateBeanFromDTO(Apartment apartment, ApartmentDTO apartmentDTO) {
         apartment.setRealtyAgent(apartmentDTO.getRealtyAgent());
-        apartment.setBuilding(apartmentDTO.getBuilding());
         apartment.setNumber(apartmentDTO.getNumber());
         apartment.setQuantityRooms(apartmentDTO.getQuantityRooms());
         apartment.setArea(apartmentDTO.getArea());

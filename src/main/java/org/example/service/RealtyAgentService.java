@@ -24,6 +24,10 @@ public class RealtyAgentService {
                 .save(transformerDtoRealtyAgent.populateBeanFromDTO(realtyAgent, realtyAgentDTO));
     }
 
+    public boolean checkIfRealtyAgentExistsByName(String name) {
+        return realtyAgentRepository.existsRealtyAgentByName(name);
+    }
+
     public List<RealtyAgent> findAll() {
         return realtyAgentRepository.findAll();
     }
@@ -32,8 +36,12 @@ public class RealtyAgentService {
         return realtyAgentRepository.findById(id).orElse(null);
     }
 
-    public RealtyAgent editAgent(int id, RealtyAgentDTO realtyAgentDTO) {
+    public RealtyAgent editAgent(int agentId, RealtyAgentDTO realtyAgentDTO) {
         return realtyAgentRepository.save(transformerDtoRealtyAgent
-                .populateBeanFromDTO(realtyAgentRepository.findById(id).orElse(null), realtyAgentDTO));
+                .populateBeanFromDTO(realtyAgentRepository.findById(agentId).get(), realtyAgentDTO));
+    }
+
+    public RealtyAgent findRealtyAgentByName(String name) {
+        return realtyAgentRepository.findRealtyAgentByName(name);
     }
 }
