@@ -34,7 +34,7 @@ public class UserService {
     public final static Integer USER_ROLE = 2;
 
     public User saveUser(UserDTO userDTO) {
-        org.example.entity.User user = new org.example.entity.User();
+        User user = new User();
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));

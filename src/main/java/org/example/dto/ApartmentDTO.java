@@ -4,27 +4,32 @@ import org.example.entity.Building;
 import org.example.entity.RealtyAgent;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class ApartmentDTO {
 
     private int id;
 
-    @NotNull(message = "Input number!")
+    @NotNull
+    @Min(value = 1, message = "Number must be positive!")
     @Digits(integer = 3, fraction = 0, message = "No more than 3 digits!")
-    private int number;
-
-    @NotNull(message = "Input quantity rooms!")
-    @Digits(integer = 2, fraction = 0, message = "No more than 1 digit!")
-    private int quantityRooms;
-
-    @NotNull(message = "Input area!")
-    @Digits(integer = 3, fraction = 1, message = "For example: 123.4")
-    private double area;
+    private Integer number;
 
     @NotNull
+    @Min(value = 1, message = "Quantity rooms must be positive!")
+    @Digits(integer = 2, fraction = 0, message = "No more than 1 digit!")
+    private Integer quantityRooms;
+
+    @NotNull
+    @Min(value = 1, message = "Area must be positive!")
+    @Digits(integer = 3, fraction = 1, message = "For example: 123.4")
+    private Double area;
+
+    @NotNull
+    @Min(value = 1, message = "Price must be positive!")
     @Digits(integer = 7, fraction = 2, message = "For example: 1234567.89")
-    private double price;
+    private Double price;
 
     private boolean status;
 
@@ -43,35 +48,35 @@ public class ApartmentDTO {
         this.id = id;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public int getQuantityRooms() {
+    public Integer getQuantityRooms() {
         return quantityRooms;
     }
 
-    public void setQuantityRooms(int quantityRooms) {
+    public void setQuantityRooms(Integer quantityRooms) {
         this.quantityRooms = quantityRooms;
     }
 
-    public double getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(double area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -106,5 +111,4 @@ public class ApartmentDTO {
     public void setRealtyAgent(RealtyAgent realtyAgent) {
         this.realtyAgent = realtyAgent;
     }
-
 }

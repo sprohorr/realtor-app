@@ -1,38 +1,25 @@
-package org.example.entity;
+package org.example.dto;
 
-import javax.persistence.*;
+import org.example.entity.Apartment;
+import org.example.entity.StatusOrder;
+import org.example.entity.User;
+
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-@Entity
-@Table(name = "order")
-public class Order {
+public class OrderDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
 
-    @Column(name = "open_time")
     private LocalDateTime openTime;
 
-    @Column(name = "close_time")
     private LocalDateTime closeTime;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "status_order_id")
     private StatusOrder status;
 
-    @OneToOne
-    @JoinColumn(name = "apartment_id")
     private Apartment apartment;
 
-    public Order() {
-    }
 
     public int getId() {
         return id;
@@ -80,18 +67,5 @@ public class Order {
 
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id == order.id && Objects.equals(openTime, order.openTime) && Objects.equals(closeTime, order.closeTime) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(apartment, order.apartment);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, openTime, closeTime, user, status, apartment);
     }
 }

@@ -1,5 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,10 +10,10 @@
     <form:form action="/login" method="post" modelAttribute="login">
         <table align="center" style="border: slateblue">
             <tr>
-                <td><form:input path="login"/></td>
+                <td><form:input path="login"/>Login</td>
             </tr>
             <tr>
-                <td><form:input path="password"/></td>
+                <td><form:input path="password"/>Password</td>
             </tr>
             <tr>
                 <td>

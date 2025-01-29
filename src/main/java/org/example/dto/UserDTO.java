@@ -28,7 +28,7 @@ public class UserDTO {
     private String login;
 
     @NotEmpty(message = "Password must not be empty!")
-    @Size(min = 8, message = "Password must be min 8 symbols!")
+    @Size(min = 4, message = "Password must be min 4 symbols!")
     private String password;
 
     private LocalDateTime createTime;

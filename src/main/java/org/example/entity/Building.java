@@ -126,4 +126,19 @@ public class Building {
     public int hashCode() {
         return Objects.hash(id, address, floors, landArea, buildingArea, quantityApartments, year, parking, description);
     }
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", floors=" + floors +
+                ", landArea=" + landArea +
+                ", buildingArea=" + buildingArea +
+                ", quantityApartments=" + quantityApartments +
+                ", year=" + year +
+                ", parking=" + parking +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

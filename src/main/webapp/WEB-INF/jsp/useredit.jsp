@@ -1,12 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Edit</title>
 </head>
 <body style="background-color: lavender">
-<div><h2 align="center">Edit user</h2></div>
+<div><h2 align="center">Edit ${user.login}</h2></div>
 <div>
     <form:form action="/useredit" method="post" modelAttribute="user">
         <input type="hidden" name="userId" value="${user.id}"/>
@@ -20,7 +20,7 @@
                 </td>
             </tr>
             <tr>
-                <td><form:input path="surname"/>Number phone
+                <td><form:input path="surname"/>Surname
                     <br/>
                     <form:errors cssStyle="color: red" path="surname"/>
                 </td>

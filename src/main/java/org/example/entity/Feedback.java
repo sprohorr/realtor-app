@@ -93,4 +93,16 @@ public class Feedback {
     public int hashCode() {
         return Objects.hash(id, description, grade, createDate, user, apartment);
     }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", grade=" + grade +
+                ", createDate=" + createDate +
+                ", user=" + user +
+                ", apartment=" + apartment +
+                '}';
+    }
 }

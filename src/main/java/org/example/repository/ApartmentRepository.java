@@ -1,15 +1,21 @@
 package org.example.repository;
 
 import org.example.entity.Apartment;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface ApartmentRepository extends JpaRepository<Apartment, Integer> {
+public interface ApartmentRepository extends PagingAndSortingRepository<Apartment, Integer> {
+
+    Page<Apartment> findAll(Pageable pageable);
+
+    List<Apartment> findAll();
 
     List<Apartment> findAllByBuilding_Id(int id);
 
-    List<Apartment> findAllByRealtyAgent_Id(int id);
+    Page<Apartment> findAllByRealtyAgent_Id(int id, Pageable pageable);
 
     Apartment findByBuilding_AddressAndAndNumber(String address, int number);
 

@@ -128,4 +128,19 @@ public class Apartment {
     public int hashCode() {
         return Objects.hash(id, number, quantityRooms, area, price, status, description, building, realtyAgent);
     }
+
+    @Override
+    public String toString() {
+        return "Apartment{" +
+                "id=" + id +
+                ", number=" + number +
+                ", quantityRooms=" + quantityRooms +
+                ", area=" + area +
+                ", price=" + price +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", building=" + building +
+                ", realtyAgent=" + realtyAgent +
+                '}';
+    }
 }

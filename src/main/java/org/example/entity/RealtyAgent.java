@@ -79,4 +79,15 @@ public class RealtyAgent {
     public int hashCode() {
         return Objects.hash(id, name, tel, email, address);
     }
+
+    @Override
+    public String toString() {
+        return "RealtyAgent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tel='" + tel + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
