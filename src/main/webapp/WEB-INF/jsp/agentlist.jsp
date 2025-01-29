@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -10,7 +11,7 @@
     <table border="2px" align="center">
         <c:forEach items="${agent}" var="agent">
             <tr>
-                <td><a href="/agentpage?agentId=${agent.id}"><c:out value="Name:${agent.name}"/></a></td>
+                <td><a href="/agentpage?agentId=${agent.id}"><c:out value="${agent.name}"/></a></td>
             </tr>
             <br/>
         </c:forEach>

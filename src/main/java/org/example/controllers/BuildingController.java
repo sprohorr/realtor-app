@@ -73,8 +73,10 @@ public class BuildingController {
     @PostMapping("/buildingedit")
     public String saveEditBuilding(@RequestParam("buildingId") int id,
                                    @ModelAttribute("building")
-                                   @Valid BuildingDTO buildingDTO, BindingResult bindingResult) {
+                                   @Valid BuildingDTO buildingDTO, BindingResult bindingResult,
+                                   ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
+            modelMap.put("building", buildingService.findBuildingById(id));
             return "/buildingedit";
         }
         buildingService.editBuilding(id, buildingDTO);

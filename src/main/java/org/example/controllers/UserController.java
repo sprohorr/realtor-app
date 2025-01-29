@@ -1,9 +1,15 @@
 package org.example.controllers;
 
 import org.example.dto.UserDTO;
+import org.example.entity.Apartment;
 import org.example.entity.User;
+import org.example.service.ApartmentService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -25,6 +31,9 @@ public class UserController {
     @Autowired
     protected UserService userService;
 
+    @Autowired
+    protected ApartmentService apartmentService;
+
     @GetMapping("/mainpage")
     private String showMainPage() {
         return "/mainpage";
@@ -34,6 +43,18 @@ public class UserController {
     public String showAdminPage(ModelMap modelMap) {
         modelMap.put("user", userService.findCurrentUser());
         return "/adminpage";
+    }
+
+    @GetMapping("/userreviewapartment")
+    public String reviewApartments(@RequestParam("userId") int userId, ModelMap modelMap,
+                                   @RequestParam(defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("building"));
+        Page<Apartment> apartments = apartmentService.findAll(pageable);
+        modelMap.addAttribute("apartments", apartments);
+        modelMap.addAttribute("currentPage", page);
+        modelMap.addAttribute("totalpage", apartments.getTotalPages());
+        modelMap.put("user", userService.findById(userId));
+        return "/userreviewapartment";
     }
 
     @GetMapping("/registrationadmin")
@@ -87,9 +108,9 @@ public class UserController {
     @PostMapping("/useredit")
     public String saveEditUser(@RequestParam("userId") int id,
                                @ModelAttribute("user") @Valid UserDTO userDTO,
-                               BindingResult bindingResult) {
+                               BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
+            modelMap.put("user", userService.findById(id));
             return "/useredit";
         }
         userService.updateUser(userDTO, id);
@@ -130,8 +151,12 @@ public class UserController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "/mainpage";
+        return "redirect:/mainpage";
     }
 
+    @GetMapping("/403")
+    public String forbidden() {
+        return "/403";
+    }
 
 }

@@ -6,6 +6,8 @@ import org.example.repository.ApartmentRepository;
 import org.example.repository.BuildingRepository;
 import org.example.util.TransformerDtoApartment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +24,12 @@ public class ApartmentService {
     @Autowired
     protected TransformerDtoApartment transformerDtoApartment;
 
-    public List<Apartment> findAll() {
+    //check
+    public Page<Apartment> findAll(Pageable pageable) {
+        return apartmentRepository.findAll(pageable);
+    }
+
+    public List<Apartment> readAll() {
         return apartmentRepository.findAll();
     }
 
@@ -30,8 +37,8 @@ public class ApartmentService {
         return apartmentRepository.findById(id).orElse(null);
     }
 
-    public List<Apartment> findAllApartmentsByRealtyAgent(int id) {
-        return apartmentRepository.findAllByRealtyAgent_Id(id);
+    public Page<Apartment> findAllApartmentsByRealtyAgent(int id, Pageable pageable) {
+        return apartmentRepository.findAllByRealtyAgent_Id(id, pageable);
     }
 
     public List<Apartment> findAllApartmentByBuilding(int id) {

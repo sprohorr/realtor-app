@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,16 +11,25 @@
 </div>
 <div>
     <table border="2px" align="center">
+        <tr>
+            <th>Address</th>
+            <th>Number apartment</th>
+            <th>Quantity rooms</th>
+            <th>Area</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
         <c:forEach var="apartment" items="${apartments}">
             <tr>
-                <td><c:out value="Address: ${apartment.building.address}"/></td>
-                <td><c:out value="Number apartment: ${apartment.number}"/></td>
-                <td><c:out value="Quantity rooms: ${apartment.quantityRooms}"/></td>
-                <td><c:out value="Area: ${apartment.area}"/></td>
-                <td><c:out value="Price: ${apartment.price}"/></td>
-                <td><c:out value="Description: ${apartment.description}"/></td>
+                <td><c:out value="${apartment.building.address}"/></td>
+                <td><c:out value="${apartment.number}"/></td>
+                <td><c:out value="${apartment.quantityRooms}"/></td>
+                <td><c:out value="${apartment.area}"/></td>
+                <td><c:out value="${apartment.price}"/></td>
+                <td><c:out value="${apartment.description}"/></td>
                 <td><c:set var="status">${apartment.status ? "Active" : "Close"}</c:set>
-                    <c:out value="Status: ${status}"/>
+                    <c:out value="${status}"/>
                 </td>
                 <td><a href="/apartmentedit?apartment.id=${apartment.id}">Edit</a></td>
             </tr>

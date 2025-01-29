@@ -2,12 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Successfully</title>
+    <title>Upload error file</title>
 </head>
-<body style="background-color: lavender">
-<div>
-    <h1 align="center">Save successfully!</h1>
-</div>
-<a href="/agentlist">List of agents</a>
+<body>
+<h2 align="center">Error, choose Excel file!</h2>
+<a href="/import"><p align="center">Return to back</p></a>
 </body>
 </html>

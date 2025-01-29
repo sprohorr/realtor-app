@@ -1,5 +1,7 @@
 package org.example.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -11,20 +13,26 @@ public class BuildingDTO {
     @NotEmpty(message = "Address must not be empty! ")
     private String address;
 
-    @NotNull(message = "null!")
-    private int floors;
+    @NotNull
+    @Min(value = 1, message = "Floors must be positive!")
+    private Integer floors;
 
-    @NotNull(message = "null!")
-    private double landArea;
+    @NotNull
+    @Min(value = 1, message = "Land area must be positive!")
+    private Double landArea;
 
-    @NotNull(message = "null!")
-    private double buildingArea;
+    @NotNull
+    @Min(value = 1, message = "Building area must be positive!")
+    private Double buildingArea;
 
-    @NotNull(message = "null!")
-    private int quantityApartments;
+    @NotNull
+    @Min(value = 1, message = "Quantity apartment must be positive!")
+    private Integer quantityApartments;
 
-    @NotNull(message = "null!")
-    private int year;
+    @NotNull
+    @Min(value = 1900, message = "The year must be less than 1900!")
+    @Max(value = 2024, message = "The year must not be greater than 2024!")
+    private Integer year;
 
     private boolean parking;
 
@@ -46,43 +54,43 @@ public class BuildingDTO {
         this.address = address;
     }
 
-    public int getFloors() {
+    public Integer getFloors() {
         return floors;
     }
 
-    public void setFloors(int floors) {
+    public void setFloors(Integer floors) {
         this.floors = floors;
     }
 
-    public double getLandArea() {
+    public Double getLandArea() {
         return landArea;
     }
 
-    public void setLandArea(double landArea) {
+    public void setLandArea(Double landArea) {
         this.landArea = landArea;
     }
 
-    public double getBuildingArea() {
+    public Double getBuildingArea() {
         return buildingArea;
     }
 
-    public void setBuildingArea(double buildingArea) {
+    public void setBuildingArea(Double buildingArea) {
         this.buildingArea = buildingArea;
     }
 
-    public int getQuantityApartments() {
+    public Integer getQuantityApartments() {
         return quantityApartments;
     }
 
-    public void setQuantityApartments(int quantityApartments) {
+    public void setQuantityApartments(Integer quantityApartments) {
         this.quantityApartments = quantityApartments;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -101,5 +109,4 @@ public class BuildingDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

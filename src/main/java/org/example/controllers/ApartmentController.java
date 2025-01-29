@@ -1,10 +1,15 @@
 package org.example.controllers;
 
 import org.example.dto.ApartmentDTO;
+import org.example.entity.Apartment;
 import org.example.service.ApartmentService;
 import org.example.service.BuildingService;
 import org.example.service.RealtyAgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,16 +32,15 @@ public class ApartmentController {
     @Autowired
     protected BuildingService buildingService;
 
-    @GetMapping("/userreviewapartment")
-    public String reviewApartment(ModelMap modelMap) {
-        modelMap.put("apartments", apartmentService.findAll());
-        return "/userreviewapartment";
-    }
-
     @GetMapping("/apartmentlist")
-    public String showApartments(@RequestParam("agentId") int agentId, ModelMap modelMap) {
+    public String showApartments(@RequestParam("agentId") int agentId, ModelMap modelMap,
+                                 @RequestParam(defaultValue = "0") int page) {
         modelMap.put("agent", realtyAgentService.findRealtyAgentById(agentId));
-        modelMap.put("apartments", apartmentService.findAllApartmentsByRealtyAgent(agentId));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("building"));
+        Page<Apartment> apartments = apartmentService.findAllApartmentsByRealtyAgent(agentId, pageable);
+        modelMap.addAttribute("apartments", apartments);
+        modelMap.addAttribute("currentPage", page);
+        modelMap.addAttribute("totalpage", apartments.getTotalPages());
         return "/apartmentlist";
     }
 
@@ -77,8 +81,9 @@ public class ApartmentController {
     public String saveEditApartment(@RequestParam("apartmentId") int apartmentId,
                                     @ModelAttribute("apartment")
                                     @Valid ApartmentDTO apartmentDTO,
-                                    BindingResult bindingResult) {
+                                    BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
+            modelMap.put("apartment", apartmentService.findApartmentById(apartmentId));
             return "/apartmentedit";
         }
         if (apartmentService.checkIfApartmentByBuildingIdAndNumber(apartmentDTO.getBuilding().getId(), apartmentDTO.getNumber())) {

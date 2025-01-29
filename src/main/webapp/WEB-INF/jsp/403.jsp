@@ -2,12 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Successfully</title>
+    <title>403</title>
 </head>
 <body style="background-color: lavender">
-<div>
-    <h2 style="color: slateblue" align="center">Add successfully!</h2>
-</div>
-<a href="/agentlist"><p align="center">Realty agent list</p></a>
+<h2 align="center" style="color: red">403 Forbidden!</h2>
+<h2 align="center"><a href="/login">Log in</a></h2>
+<h2 align="center"><a href="/mainpage">Main page</a></h2>
 </body>
 </html>

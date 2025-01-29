@@ -65,8 +65,9 @@ public class RealtyAgentController {
     @PostMapping("/agentedit")
     public String saveEditAgent(@RequestParam("agentId") int id,
                                 @ModelAttribute("agent") @Valid RealtyAgentDTO realtyAgentDTO,
-                                BindingResult bindingResult) {
+                                BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
+            modelMap.put("agent", realtyAgentService.findRealtyAgentById(id));
             return "/agentedit";
         }
         realtyAgentService.editAgent(id, realtyAgentDTO);

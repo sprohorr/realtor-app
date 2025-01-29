@@ -1,6 +1,6 @@
 package org.example.controllers;
 
-import org.example.service.ExcelService;
+import org.example.service.ImportExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-public class ExcelController {
+public class ImportExcelController {
 
     @Autowired
-    protected ExcelService excelService;
+    protected ImportExcelService excelService;
 
     @GetMapping("/export")
     public void exportDataToExcel(@RequestParam("buildingId") int id,
@@ -34,11 +34,19 @@ public class ExcelController {
 
     @PostMapping("/import")
     public String importDataFromExcel(@RequestParam("file") MultipartFile file) {
+        if (!file.getContentType().equals("xlsx")) {
+            return "importerror";
+        }
         try {
             excelService.uploadDataFromExcel(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return "redirect:/adminpage";
+    }
+
+    @GetMapping("/importerror")
+    public String error() {
+        return "/importerror";
     }
 }

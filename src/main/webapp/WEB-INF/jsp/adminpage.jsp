@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -5,9 +6,7 @@
     <title>Admin page</title>
 </head>
 <body style="background-color: lavender">
-<div align="center">
-    <jsp:include page="userpage.jsp"></jsp:include>
-</div>
+<div><h2 align="center">Admin name:${user.login}</h2></div>
 <a href="/registrationadmin"><p align="center">Add new admin</p></a>
 <div>
     <h2 align="center" style="color: slateblue">Realty agent</h2>
@@ -37,5 +36,7 @@
         </tr>
     </table>
 </div>
+<a href="/logout">Log out</a>
+<a href="/userpage">Return to back</a>
 </body>
 </html>
